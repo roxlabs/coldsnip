@@ -1,0 +1,45 @@
+{
+  "name": "snippetfy",
+  "version": "0.1.0",
+  "description": "Extracts code snippets from source files",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "npm test && tsc",
+    "prettier": "prettier --write \"./**/*.{js,json,ts}\"",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roxlabs/snippetfy.git"
+  },
+  "keywords": [
+    "snippet",
+    "code snippet",
+    "code sample"
+  ],
+  "author": "Daniel Rochetti",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roxlabs/snippetfy/issues"
+  },
+  "homepage": "https://github.com/roxlabs/snippetfy#readme",
+  "dependencies": {
+    "array.prototype.flat": "^1.2.4",
+    "fast-glob": "^3.2.7",
+    "strip-indent": "^4.0.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/array.prototype.flat": "^1.2.1",
+    "@types/chai": "^4.2.21",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.4.2",
+    "chai": "^4.3.4",
+    "mocha": "^9.0.3",
+    "nyc": "^15.1.0",
+    "prettier": "^2.3.2",
+    "source-map-support": "^0.5.19",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  }
+}
