@@ -20,7 +20,7 @@ lib/
 !.gitkeep
 
 # Testing
-.nyc_output/
+coverage/
 
 ### macOS ###
 # General
