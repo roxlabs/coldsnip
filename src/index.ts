@@ -5,30 +5,8 @@ import * as fs from "fs";
 import * as path from "path";
 import * as readline from "readline";
 import stripIndent from "strip-indent";
-import { parseStartTag, matchesEndTag } from "./patterns";
-
-interface Snippet {
-  language: string;
-  sourcePath: string;
-  startLine: number;
-  endLine: number;
-  content: string;
-  permalink?: string;
-}
-
-interface LocalPath {
-  path: string;
-  pattern: string;
-}
-
-interface GitRepo {
-  url: string;
-  pattern: string;
-  tag?: string;
-  branch?: string;
-}
-
-type Snippets = { [key: string]: Snippet[] };
+import { matchesEndTag, parseStartTag } from "./patterns";
+import type { GitRepo, LocalPath, Snippets } from "./types";
 
 async function extractSnippetFromFile(filePath: string): Promise<Snippets> {
   console.log("path", path.resolve(filePath));
