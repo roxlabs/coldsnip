@@ -1,17 +1,33 @@
-import { existsSync } from "fs";
+import { existsSync, rmSync as removePath } from "fs";
+import { tmpdir } from "os";
+import { resolve as resolvePath } from "path";
 import { ensureRepoIsCurrent, getPermalink, getRepoPath } from "../git";
 
 describe("the Git repo test suite", () => {
+  const workingDir = resolvePath(tmpdir(), "snippety-git-test");
+
   it("should get the repo name from the Git HTTPS URL", () => {
     const url = "https://github.com/roxlabs/snippetfy";
     expect(getRepoPath(url)).toBe("/roxlabs/snippetfy");
   });
 
+  it("should ensure the main branch of the repo is newly cloned", async () => {
+    if (existsSync(workingDir)) {
+      removePath(workingDir, { recursive: true });
+    }
+    const ref = await ensureRepoIsCurrent({
+      url: "https://github.com/drochetti/drochetti",
+      workingDir,
+    });
+    expect(existsSync(ref.workingDir)).toBe(true);
+  });
+
   it("should ensure the main branch of the repo is cloned and up-to-date", async () => {
     const dir = await ensureRepoIsCurrent({
       url: "https://github.com/drochetti/drochetti",
+      workingDir,
     });
-    expect(existsSync(dir)).toBe(true);
+    expect(existsSync(dir.workingDir)).toBe(true);
   });
 
   it("should resolve the permalink for GitHub repos", () => {
@@ -51,5 +67,17 @@ describe("the Git repo test suite", () => {
     expect(permalink).toBe(
       "https://bitbucket.org/atlassian/npm-publish/src/81c90f7e6b1c0859652bf6bd0dc478d99c37d6ac/test/test.py#lines-22:27"
     );
+  });
+
+  it("should throw an error on unsupported Git providers", () => {
+    expect(() => {
+      getPermalink({
+        repoUrl: "https://unsupported.provider.com/cool/repo",
+        commit: "main",
+        path: "README.md",
+        startLine: 1,
+        endLine: 2,
+      });
+    }).toThrow(/provider not yet supported/);
   });
 });

@@ -1,14 +1,17 @@
-import flat from "array.prototype.flat";
 import { once } from "events";
 import glob from "fast-glob";
 import * as fs from "fs";
 import * as path from "path";
 import * as readline from "readline";
-import stripIndent from "strip-indent";
+import createSnippet from "./createSnippet";
+import { ensureRepoIsCurrent } from "./git";
 import { matchesEndTag, parseStartTag } from "./patterns";
-import type { GitRepo, LocalPath, Snippets } from "./types";
+import type { Snippets, SourcePath, SourceRef } from "./types";
 
-async function extractSnippetFromFile(filePath: string): Promise<Snippets> {
+async function extractSnippetFromFile(
+  filePath: string,
+  ref: SourceRef
+): Promise<Snippets> {
   const stream = fs.createReadStream(path.resolve(filePath));
   const rl = readline.createInterface({
     input: stream,
@@ -30,14 +33,19 @@ async function extractSnippetFromFile(filePath: string): Promise<Snippets> {
       key = openTag.key;
       startLine = currentLine + 1;
     } else if (open && matchesEndTag(line) && key) {
+      const endLine = currentLine - 1;
+      const { repoUrl, commit, directory } = ref;
       snippets[key] = [
-        {
-          language: path.extname(filePath).slice(1),
-          sourcePath: "",
-          content: stripIndent(content.join("\n")).trim(),
+        createSnippet({
+          content: content.join("\n"),
+          directory,
+          filePath,
           startLine: startLine as number,
-          endLine: currentLine - 1,
-        },
+          endLine,
+          repoUrl,
+          commit,
+          qualifier: openTag?.qualifier,
+        }),
       ];
       open = false;
       startLine = undefined;
@@ -52,29 +60,49 @@ async function extractSnippetFromFile(filePath: string): Promise<Snippets> {
   return snippets;
 }
 
-async function extractSnippets(
-  sources: Array<LocalPath | GitRepo>
-): Promise<Snippets> {
-  const promises: Array<Promise<string[]>> = [];
+type SourceFilesTuple = [string[], SourceRef];
+async function extractSnippets(sources: SourcePath[]): Promise<Snippets> {
+  const promises: Array<Promise<SourceFilesTuple>> = [];
   for (const source of sources) {
     if ("path" in source) {
-      promises.push(glob(source.pattern, { cwd: source.path, absolute: true }));
+      // local directories are straighforward to handle
+      promises.push(
+        Promise.all([
+          glob(source.pattern, { cwd: source.path, absolute: true }),
+          Promise.resolve({ directory: source.path }),
+        ])
+      );
     } else if ("url" in source) {
-      console.log("TODO");
+      // remote git repos need to be pulled/cloned
+      const ref = await ensureRepoIsCurrent(source);
+      const { workingDir, commit } = ref;
+      promises.push(
+        Promise.all([
+          glob(source.pattern, { cwd: workingDir, absolute: true }),
+          Promise.resolve({
+            directory: workingDir,
+            repoUrl: source.url,
+            commit,
+          }),
+        ])
+      );
     }
   }
-  const allFiles = await Promise.all(promises);
-  const files = flat(allFiles);
-  const collectedSnippets = await Promise.all(
-    files.map(extractSnippetFromFile)
-  );
+  const files = await Promise.all(promises);
+  files.forEach(([paths, input]) => {});
+  //   const a = flat(files);
+  //   const collectedSnippets = await Promise.all(
+  //       files.map(([paths, input]) => {
+  //           extractSnippetFromFile(paths, input)
+  //       })
+  //   );
   const snippets: Snippets = {};
-  for (const item of collectedSnippets) {
-    Object.keys(item).forEach((key) => {
-      snippets[key] = snippets[key] || [];
-      snippets[key] = [...snippets[key], ...item[key]];
-    });
-  }
+  //   for (const item of collectedSnippets) {
+  //     Object.keys(item).forEach((key) => {
+  //       snippets[key] = snippets[key] || [];
+  //       snippets[key] = [...snippets[key], ...item[key]];
+  //     });
+  //   }
   return snippets;
 }
 

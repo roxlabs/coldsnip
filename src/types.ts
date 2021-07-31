@@ -5,6 +5,7 @@ export interface Snippet {
   endLine: number;
   content: string;
   permalink?: string;
+  qualifier?: string;
 }
 
 export interface LocalPath {
@@ -17,16 +18,30 @@ export interface GitRepo {
   pattern: string;
   branch?: string;
   workingDir?: string;
+  commit?: string;
 }
+
+export type SourcePath = LocalPath | GitRepo;
 
 export type GitRepoInfo = Omit<GitRepo, "pattern">;
 
-export interface FileRef {
+export interface SourceRef {
+  directory: string;
+  repoUrl?: string;
+  commit?: string;
+}
+
+export interface GitFileRef {
   repoUrl: string;
   path: string;
   commit: string;
   startLine: number;
   endLine: number;
+}
+
+export interface GitRepoRef {
+  workingDir: string;
+  commit: string;
 }
 
 export type Snippets = { [key: string]: Snippet[] };

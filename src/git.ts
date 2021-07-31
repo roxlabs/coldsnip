@@ -2,14 +2,16 @@ import { Clone, Repository } from "nodegit";
 import * as os from "os";
 import * as path from "path";
 import { URL } from "url";
-import type { FileRef, GitRepoInfo } from "./types";
+import type { GitFileRef, GitRepoInfo, GitRepoRef } from "./types";
 
 export function getRepoPath(url: string) {
   const parsedUrl = new URL(url);
   return parsedUrl.pathname;
 }
 
-export async function ensureRepoIsCurrent(info: GitRepoInfo): Promise<string> {
+export async function ensureRepoIsCurrent(
+  info: GitRepoInfo
+): Promise<GitRepoRef> {
   const repoPath = getRepoPath(info.url);
   const workingDir =
     info.workingDir ?? path.join(os.tmpdir(), ".snippetfy", repoPath);
@@ -21,17 +23,18 @@ export async function ensureRepoIsCurrent(info: GitRepoInfo): Promise<string> {
     await repo.fetch("origin");
     await repo.mergeBranches(branch, `refs/remotes/origin/${branch}`);
   } catch (e) {
-    console.info(
-      `Git repo ${info.url} is not cloned yet... cloning it to ${workingDir}`
-    );
     repo = await Clone.clone(info.url, workingDir, {
       checkoutBranch: branch,
     });
   }
-  return workingDir;
+  const commit = (await repo.getHeadCommit()).id().toString();
+  return {
+    commit,
+    workingDir,
+  };
 }
 
-export function getPermalink(ref: FileRef): string {
+export function getPermalink(ref: GitFileRef): string {
   const url = new URL(ref.repoUrl);
   switch (url.hostname) {
     case "github.com":
