@@ -38,4 +38,16 @@ describe("the extractSnippets public API test suite", () => {
     ]);
     expect(Object.keys(snippets).length).toBe(0);
   });
+
+  it("it should extract a snippet from a SQL file", async () => {
+    const snippets = await extractSnippets([
+      {
+        path: "src/__tests__",
+        pattern: "snippets/query.sql",
+      },
+    ]);
+    const keys = Object.keys(snippets);
+    expect(keys.length).toBe(1);
+    expect(keys[0]).toBe("query");
+  });
 });
