@@ -28,7 +28,6 @@ export async function ensureRepoIsCurrent(info: GitRepoInfo): Promise<string> {
       checkoutBranch: branch,
     });
   }
-  console.log((await repo.getHeadCommit()).id().toString());
   return workingDir;
 }
 
