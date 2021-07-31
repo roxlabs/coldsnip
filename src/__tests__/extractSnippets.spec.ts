@@ -50,4 +50,21 @@ describe("the extractSnippets public API test suite", () => {
     expect(keys.length).toBe(1);
     expect(keys[0]).toBe("query");
   });
+
+  it("it should extract a snippet with the same key from multiple files", async () => {
+    const snippets = await extractSnippets([
+      {
+        path: "src/__tests__",
+        pattern: "snippets/multi.*",
+      },
+    ]);
+    const keys = Object.keys(snippets);
+    expect(keys.length).toBe(1);
+    expect(keys[0]).toBe("multi");
+    const all = snippets["multi"];
+    expect(all.length).toBe(4);
+    expect(all.find((snippet) => snippet.language === "rb").content).toBe(
+      'puts "hello, world"'
+    );
+  });
 });

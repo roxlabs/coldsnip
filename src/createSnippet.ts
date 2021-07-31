@@ -24,7 +24,7 @@ export default function createSnippet(input: SnippetInput): Snippet {
     commit,
     qualifier,
   } = input;
-  const sourcePath = getRelativePath(filePath, directory);
+  const sourcePath = getRelativePath(directory, filePath);
   const permalink =
     repoUrl !== undefined && commit !== undefined
       ? getPermalink({
