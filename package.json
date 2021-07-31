@@ -1,6 +1,6 @@
 {
   "name": "snippetfy",
-  "version": "0.1.0",
+  "version": "0.7.0",
   "description": "Extracts code snippets from source files",
   "main": "lib/index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/roxlabs/snippetfy#readme",
   "dependencies": {
-    "array.prototype.flat": "^1.2.4",
+    "async": "^3.2.0",
     "fast-glob": "^3.2.7",
     "nodegit": "^0.27.0",
     "strip-indent": "^4.0.0"
@@ -33,7 +33,7 @@
     "@babel/core": "^7.14.8",
     "@babel/preset-env": "^7.14.8",
     "@babel/preset-typescript": "^7.14.5",
-    "@types/array.prototype.flat": "^1.2.1",
+    "@types/async": "^3.2.7",
     "@types/jest": "^26.0.24",
     "@types/node": "^16.4.2",
     "@types/nodegit": "^0.27.3",

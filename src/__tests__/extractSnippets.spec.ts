@@ -1,6 +1,21 @@
-import extractSnippets from "../extractSnippets";
+import { basename } from "path";
+import extractSnippets, { findFiles } from "../extractSnippets";
 
 describe("the extractSnippets public API test suite", () => {
+  it("should find the files from all sources", async () => {
+    const result = await findFiles([
+      { path: "./", pattern: "src/__tests__/snippets/*.js" },
+      { url: "https://github.com/drochetti/drochetti", pattern: "*.md" },
+    ]);
+    const paths: string[] = [];
+    result.forEach(([files, source]) => {
+      paths.push(...files);
+    });
+    const filenames = paths.map((path) => basename(path));
+    expect(filenames.length).toBe(3);
+    expect(filenames).toEqual(["missingKey.js", "twoSnippets.js", "README.md"]);
+  });
+
   it("it should extract two snippets", async () => {
     const snippets = await extractSnippets([
       {

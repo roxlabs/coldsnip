@@ -1,6 +1,8 @@
+import { asyncify, queue } from "async";
 import { once } from "events";
 import glob from "fast-glob";
 import * as fs from "fs";
+import { cpus } from "os";
 import * as path from "path";
 import * as readline from "readline";
 import createSnippet from "./createSnippet";
@@ -8,10 +10,45 @@ import { ensureRepoIsCurrent } from "./git";
 import { matchesEndTag, parseStartTag } from "./patterns";
 import type { Snippets, SourcePath, SourceRef } from "./types";
 
+type SourceFilesTuple = [string[], SourceRef];
+type SourceFileRecord = { filePath: string; ref: SourceRef };
+
+export async function findFiles(
+  sources: SourcePath[]
+): Promise<SourceFilesTuple[]> {
+  const promises: Array<Promise<SourceFilesTuple>> = [];
+  for (const source of sources) {
+    if ("path" in source) {
+      // local directories are straighforward to handle
+      promises.push(
+        Promise.all([
+          glob(source.pattern, { cwd: source.path, absolute: true }),
+          Promise.resolve({ directory: source.path }),
+        ])
+      );
+    } else if ("url" in source) {
+      // remote git repos need to be pulled/cloned
+      const ref = await ensureRepoIsCurrent(source);
+      const { workingDir, commit } = ref;
+      promises.push(
+        Promise.all([
+          glob(source.pattern, { cwd: workingDir, absolute: true }),
+          Promise.resolve({
+            directory: workingDir,
+            repoUrl: source.url,
+            commit,
+          }),
+        ])
+      );
+    }
+  }
+  return Promise.all(promises);
+}
+
 async function extractSnippetFromFile(
-  filePath: string,
-  ref: SourceRef
+  record: SourceFileRecord
 ): Promise<Snippets> {
+  const { filePath, ref } = record;
   const stream = fs.createReadStream(path.resolve(filePath));
   const rl = readline.createInterface({
     input: stream,
@@ -60,49 +97,38 @@ async function extractSnippetFromFile(
   return snippets;
 }
 
-type SourceFilesTuple = [string[], SourceRef];
 async function extractSnippets(sources: SourcePath[]): Promise<Snippets> {
-  const promises: Array<Promise<SourceFilesTuple>> = [];
-  for (const source of sources) {
-    if ("path" in source) {
-      // local directories are straighforward to handle
-      promises.push(
-        Promise.all([
-          glob(source.pattern, { cwd: source.path, absolute: true }),
-          Promise.resolve({ directory: source.path }),
-        ])
-      );
-    } else if ("url" in source) {
-      // remote git repos need to be pulled/cloned
-      const ref = await ensureRepoIsCurrent(source);
-      const { workingDir, commit } = ref;
-      promises.push(
-        Promise.all([
-          glob(source.pattern, { cwd: workingDir, absolute: true }),
-          Promise.resolve({
-            directory: workingDir,
-            repoUrl: source.url,
-            commit,
-          }),
-        ])
-      );
-    }
-  }
-  const files = await Promise.all(promises);
-  files.forEach(([paths, input]) => {});
-  //   const a = flat(files);
-  //   const collectedSnippets = await Promise.all(
-  //       files.map(([paths, input]) => {
-  //           extractSnippetFromFile(paths, input)
-  //       })
-  //   );
+  // setup the processing queue and result aggregator
+  const collectedSnippets: Array<Snippets> = [];
+  const concurrency = cpus().length * 2;
+  const worker = async (record: SourceFileRecord) => {
+    const snippet = await extractSnippetFromFile(record);
+    collectedSnippets.push(snippet);
+  };
+  const extractorQueue = queue<SourceFileRecord>(asyncify(worker), concurrency);
+
+  // Find all files, either from local path or a git repo
+  const files = await findFiles(sources);
+
+  // TODO: can this be improved?
+  files.forEach(([paths, ref]) => {
+    paths.forEach((filePath) => {
+      extractorQueue.push<SourceFileRecord>({ filePath, ref });
+    });
+  });
+
+  // wait for the queue to process all tasks
+  await extractorQueue.drain();
+
+  // and then aggregate the results into a single Snippets object
+  // merging the ones with the same key
   const snippets: Snippets = {};
-  //   for (const item of collectedSnippets) {
-  //     Object.keys(item).forEach((key) => {
-  //       snippets[key] = snippets[key] || [];
-  //       snippets[key] = [...snippets[key], ...item[key]];
-  //     });
-  //   }
+  for (const item of collectedSnippets) {
+    Object.keys(item).forEach((key) => {
+      snippets[key] = snippets[key] || [];
+      snippets[key] = [...snippets[key], ...item[key]];
+    });
+  }
   return snippets;
 }
 
