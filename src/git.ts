@@ -2,7 +2,7 @@ import { Clone, Repository } from "nodegit";
 import * as os from "os";
 import * as path from "path";
 import { URL } from "url";
-import type { GitRepoInfo } from "./types";
+import type { FileRef, GitRepoInfo } from "./types";
 
 export function getRepoPath(url: string) {
   const parsedUrl = new URL(url);
@@ -30,4 +30,18 @@ export async function ensureRepoIsCurrent(info: GitRepoInfo): Promise<string> {
   }
   console.log((await repo.getHeadCommit()).id().toString());
   return workingDir;
+}
+
+export function getPermalink(ref: FileRef): string {
+  const url = new URL(ref.repoUrl);
+  switch (url.hostname) {
+    case "github.com":
+      return `${ref.repoUrl}/blob/${ref.commit}/${ref.path}#L${ref.startLine}-L${ref.endLine}`;
+    case "gitlab.com":
+      return `${ref.repoUrl}/-/blob/${ref.commit}/${ref.path}#L${ref.startLine}-${ref.endLine}`;
+    case "bitbucket.org":
+      return `${ref.repoUrl}/src/${ref.commit}/${ref.path}#lines-${ref.startLine}:${ref.endLine}`;
+    default:
+      throw new Error(`Git provider not yet supported: ${ref.repoUrl}`);
+  }
 }

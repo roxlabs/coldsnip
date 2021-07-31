@@ -21,4 +21,12 @@ export interface GitRepo {
 
 export type GitRepoInfo = Omit<GitRepo, "pattern">;
 
+export interface FileRef {
+  repoUrl: string;
+  path: string;
+  commit: string;
+  startLine: number;
+  endLine: number;
+}
+
 export type Snippets = { [key: string]: Snippet[] };
