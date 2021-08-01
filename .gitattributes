@@ -1,0 +1,2 @@
+# Exclude the test fixtures from language statistics
+src/__tests__/snippets/* linguist-vendored
