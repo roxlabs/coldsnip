@@ -6,7 +6,7 @@ function drawLighsaber() {
   // @snippet:end
 }
 
-// @snippet:start(second)
+// @snippet:start(second,qualifier)
 function useForce() {
   luke.concentrate();
   luke.feelTheForce();

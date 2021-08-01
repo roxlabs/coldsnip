@@ -29,6 +29,16 @@ describe("the extractSnippets public API test suite", () => {
     expect(keys[1]).toBe("second");
   });
 
+  it("it should extract two snippets and the second should have a qualifier", async () => {
+    const snippets = await extractSnippets([
+      {
+        path: "src/__tests__",
+        pattern: "snippets/twoSnippets.js",
+      },
+    ]);
+    expect(snippets["second"][0].qualifier).toBe("qualifier");
+  });
+
   it("it should contain no snippet since the start tag is missing the key", async () => {
     const snippets = await extractSnippets([
       {

@@ -60,6 +60,7 @@ async function extractSnippetFromFile(
   let open = false;
   let startLine: number | undefined = undefined;
   let key: string | undefined = undefined;
+  let qualifier: string | undefined = undefined;
   let content: string[] = [];
 
   rl.on("line", (line) => {
@@ -68,6 +69,7 @@ async function extractSnippetFromFile(
     if (!open && openTag) {
       open = true;
       key = openTag.key;
+      qualifier = openTag.qualifier;
       startLine = currentLine + 1;
     } else if (open && matchesEndTag(line) && key) {
       const endLine = currentLine - 1;
@@ -81,7 +83,7 @@ async function extractSnippetFromFile(
           endLine,
           repoUrl,
           commit,
-          qualifier: openTag?.qualifier,
+          qualifier,
         }),
       ];
       open = false;
