@@ -77,4 +77,18 @@ describe("the extractSnippets public API test suite", () => {
       'puts "hello, world"'
     );
   });
+
+  it("it should extract a snippet with indentation and strip the extra spaces", async () => {
+    const snippets = await extractSnippets([
+      {
+        path: "src/__tests__",
+        pattern: "snippets/indentedContent.html",
+      },
+    ]);
+    const all = snippets["indent"];
+    expect(all.length).toBe(1);
+    expect(all.find((snippet) => snippet.language === "html").content).toBe(
+      "<div>\n  <span>Indented content should be stripped</span>\n</div>"
+    );
+  });
 });
