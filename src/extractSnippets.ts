@@ -13,6 +13,12 @@ import type { Snippets, SourcePath, SourceRef } from "./types";
 type SourceFilesTuple = [string[], SourceRef];
 type SourceFileRecord = { filePath: string; ref: SourceRef };
 
+/**
+ *
+ * @internal
+ * @param sources a list of source paths (local or git repos) to search for files
+ * @returns a list of tuples, containing their source path and the array of matched files.
+ */
 export async function findFiles(
   sources: SourcePath[]
 ): Promise<SourceFilesTuple[]> {
@@ -45,6 +51,11 @@ export async function findFiles(
   return Promise.all(promises);
 }
 
+/**
+ * @internal
+ * @param record
+ * @returns
+ */
 async function extractSnippetFromFile(
   record: SourceFileRecord
 ): Promise<Snippets> {
@@ -99,6 +110,24 @@ async function extractSnippetFromFile(
   return snippets;
 }
 
+/**
+ * The main function of the library. It takes a list of {@link SourcePath} that represents
+ * local directories or Git repositories where source files containing tagged code snippets
+ * will be parsed and extracted into an indexed data structure (represented by {@link Snippets}).
+ *
+ * ```js
+ * const snippets = await extractSnippets([
+ *   { path: "~/dev/projects/local", pattern: "*.js" },
+ *   { url: "https://github.com/roxlabs/snippetfy", pattern: "*.ts" },
+ * ]);
+ * ```
+ *
+ * @name extractSnippets
+ * @public
+ * @param sources a collection of local or remote (_i.e._ Git) sources.
+ * @returns an object indexed by a key, representing the snippet identifier and an array of one
+ * or more code snippets.
+ */
 async function extractSnippets(sources: SourcePath[]): Promise<Snippets> {
   // setup the processing queue and result aggregator
   const collectedSnippets: Array<Snippets> = [];
@@ -115,7 +144,7 @@ async function extractSnippets(sources: SourcePath[]): Promise<Snippets> {
   // TODO: can this be improved?
   files.forEach(([paths, ref]) => {
     paths.forEach((filePath) => {
-      extractorQueue.push<SourceFileRecord>({ filePath, ref });
+      extractorQueue.push({ filePath, ref });
     });
   });
 

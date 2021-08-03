@@ -4,7 +4,7 @@ import { resolve as resolvePath } from "path";
 import { ensureRepoIsCurrent, getPermalink, getRepoPath } from "../git";
 
 describe("the Git repo test suite", () => {
-  const workingDir = resolvePath(tmpdir(), "snippety-git-test");
+  const workingDir = resolvePath(tmpdir(), "snippetfy-git-test");
 
   it("should get the repo name from the Git HTTPS URL", () => {
     const url = "https://github.com/roxlabs/snippetfy";

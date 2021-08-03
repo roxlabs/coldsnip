@@ -7,4 +7,5 @@ export type {
   Snippet,
   Snippets,
 } from "./types";
-export default extractSnippets;
+
+export { extractSnippets };

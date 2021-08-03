@@ -1,0 +1,13 @@
+{
+  "out": "docs/reference",
+  "entryPoints": ["./src/index.ts"],
+  "exclude": ["./src/__tests__/**"],
+  "excludeExternals": true,
+  "excludeInternal": false,
+  "includeVersion": true,
+  "plugin": ["typedoc-plugin-markdown"],
+  "readme": "none",
+  "hideGenerator": true,
+  "hideBreadcrumbs": true,
+  "entryDocument": "index.md"
+}

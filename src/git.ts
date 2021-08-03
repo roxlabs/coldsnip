@@ -13,13 +13,14 @@ export async function ensureRepoIsCurrent(
   info: GitRepoInfo
 ): Promise<GitRepoRef> {
   const repoPath = getRepoPath(info.url);
-  const workingDir =
-    info.workingDir ?? path.join(os.tmpdir(), ".snippetfy", repoPath);
   const branch = info.branch ?? "main";
+  const workingDir =
+    info.workingDir ?? path.join(os.tmpdir(), ".snippetfy", repoPath, branch);
+
   let repo: Repository;
   try {
     repo = await Repository.open(workingDir);
-    await repo.checkoutBranch(info.branch ?? branch);
+    await repo.checkoutBranch(branch);
     await repo.fetch("origin");
     await repo.mergeBranches(branch, `refs/remotes/origin/${branch}`);
   } catch (e) {
