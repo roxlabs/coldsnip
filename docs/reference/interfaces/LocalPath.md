@@ -2,6 +2,8 @@
 
 Represents a local directory and a matching pattern/glob for files.
 
+**`see`** GitRepo
+
 ## Table of contents
 
 ### Properties
@@ -15,9 +17,11 @@ Represents a local directory and a matching pattern/glob for files.
 
 • **path**: `string`
 
+The relative or absolute path.
+
 #### Defined in
 
-[types.ts:31](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L31)
+[types.ts:39](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L39)
 
 ___
 
@@ -25,6 +29,8 @@ ___
 
 • **pattern**: `string`
 
+The file pattern / glob to match.
+
 #### Defined in
 
-[types.ts:32](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L32)
+[types.ts:41](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L41)

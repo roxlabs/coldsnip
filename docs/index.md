@@ -6,6 +6,4 @@ description: "Snippetfy, a library to extract code snippets from source files. N
 permalink: /
 ---
 
-# Write documentation with actual code
-
-Tá funcionando isso aqui?
+{% include home.md %}

@@ -5,7 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "npm test && tsc",
-    "docs": "typedoc",
+    "docs:readme": "cp README.md ./docs/_includes/home.md",
+    "docs:typedoc": "typedoc",
+    "docs": "npm run docs:readme & npm run docs:typedoc",
     "prettier": "prettier --write \"./**/*.{js,json,ts}\"",
     "test": "jest"
   },

@@ -1,3 +1,5 @@
 # Exclude the test fixtures from language statistics
+docs/_includes/home.md linguist-generated
+docs/reference/* linguist-generated
 docs/* linguist-documentation
 src/__tests__/snippets/* linguist-vendored

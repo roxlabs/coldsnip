@@ -11,8 +11,14 @@ export interface Snippet {
   startLine: number;
   /** The end line of the snippet. */
   endLine: number;
+  /** The snippet content. Leading spaces are trimmed. */
   content: string;
+  /** The link to the file on the remote Git repo when available. */
   permalink?: string;
+  /**
+   * An extra qualifier that can be used to differentiate snippets with the same key
+   * that might come from the same file extension.
+   */
   qualifier?: string;
 }
 
@@ -26,9 +32,12 @@ export type Snippets = { [key: string]: Snippet[] };
 
 /**
  * Represents a local directory and a matching pattern/glob for files.
+ * @see GitRepo
  */
 export interface LocalPath {
+  /** The relative or absolute path. */
   path: string;
+  /** The file pattern / glob to match. */
   pattern: string;
 }
 
@@ -37,11 +46,20 @@ export interface LocalPath {
  * @see LocalPath
  */
 export interface GitRepo {
+  /** The remote Git repository URL. */
   url: string;
+  /** The file pattern / glob to match. */
   pattern: string;
+  /**
+   * An optional branch name.
+   * @default "main"
+   */
   branch?: string;
+  /**
+   * The directory where the repo should be cloned to.
+   * @default "$TMP/repoName/branch"
+   */
   workingDir?: string;
-  commit?: string;
 }
 
 /**

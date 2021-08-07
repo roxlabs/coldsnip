@@ -9,7 +9,6 @@ Represents a Git repository and a matching pattern/glob for files.
 ### Properties
 
 - [branch](GitRepo.md#branch)
-- [commit](GitRepo.md#commit)
 - [pattern](GitRepo.md#pattern)
 - [url](GitRepo.md#url)
 - [workingDir](GitRepo.md#workingdir)
@@ -20,19 +19,13 @@ Represents a Git repository and a matching pattern/glob for files.
 
 • `Optional` **branch**: `string`
 
-#### Defined in
+An optional branch name.
 
-[types.ts:42](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L42)
-
-___
-
-### commit
-
-• `Optional` **commit**: `string`
+**`default`** "main"
 
 #### Defined in
 
-[types.ts:44](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L44)
+[types.ts:57](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L57)
 
 ___
 
@@ -40,9 +33,11 @@ ___
 
 • **pattern**: `string`
 
+The file pattern / glob to match.
+
 #### Defined in
 
-[types.ts:41](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L41)
+[types.ts:52](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L52)
 
 ___
 
@@ -50,9 +45,11 @@ ___
 
 • **url**: `string`
 
+The remote Git repository URL.
+
 #### Defined in
 
-[types.ts:40](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L40)
+[types.ts:50](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L50)
 
 ___
 
@@ -60,6 +57,10 @@ ___
 
 • `Optional` **workingDir**: `string`
 
+The directory where the repo should be cloned to.
+
+**`default`** "$TMP/repoName/branch"
+
 #### Defined in
 
-[types.ts:43](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L43)
+[types.ts:62](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L62)

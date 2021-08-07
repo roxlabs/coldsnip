@@ -34,7 +34,7 @@ each supported language.
 
 #### Defined in
 
-[types.ts:25](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L25)
+[types.ts:31](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L31)
 
 ___
 
@@ -47,7 +47,7 @@ entry point of the library.
 
 #### Defined in
 
-[types.ts:51](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L51)
+[types.ts:69](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L69)
 
 ## Functions
 
@@ -83,4 +83,4 @@ or more code snippets.
 
 #### Defined in
 
-[extractSnippets.ts:131](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/extractSnippets.ts#L131)
+[extractSnippets.ts:131](https://github.com/roxlabs/snippetfy/blob/a37309d/src/extractSnippets.ts#L131)

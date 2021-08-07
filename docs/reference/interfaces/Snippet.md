@@ -21,9 +21,11 @@ Represents a code snippet extracted from a source file. The field
 
 • **content**: `string`
 
+The snippet content. Leading spaces are trimmed.
+
 #### Defined in
 
-[types.ts:14](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L14)
+[types.ts:15](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L15)
 
 ___
 
@@ -35,7 +37,7 @@ The end line of the snippet.
 
 #### Defined in
 
-[types.ts:13](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L13)
+[types.ts:13](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L13)
 
 ___
 
@@ -47,7 +49,7 @@ The source language. It matches the file extension.
 
 #### Defined in
 
-[types.ts:7](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L7)
+[types.ts:7](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L7)
 
 ___
 
@@ -55,9 +57,11 @@ ___
 
 • `Optional` **permalink**: `string`
 
+The link to the file on the remote Git repo when available.
+
 #### Defined in
 
-[types.ts:15](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L15)
+[types.ts:17](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L17)
 
 ___
 
@@ -65,9 +69,12 @@ ___
 
 • `Optional` **qualifier**: `string`
 
+An extra qualifier that can be used to differentiate snippets with the same key
+that might come from the same file extension.
+
 #### Defined in
 
-[types.ts:16](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L16)
+[types.ts:22](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L22)
 
 ___
 
@@ -79,7 +86,7 @@ The file path relative to the working directory.
 
 #### Defined in
 
-[types.ts:9](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L9)
+[types.ts:9](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L9)
 
 ___
 
@@ -91,4 +98,4 @@ The start line of the snippet.
 
 #### Defined in
 
-[types.ts:11](https://github.com/roxlabs/snippetfy/blob/e44e5f1/src/types.ts#L11)
+[types.ts:11](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L11)
