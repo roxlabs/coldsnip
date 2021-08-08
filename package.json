@@ -2,9 +2,27 @@
   "name": "snippetfy",
   "version": "0.7.0",
   "description": "Extracts code snippets from source files",
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "bin": {
+    "snippetfy": "./bin/run"
+  },
+  "files": [
+    "/bin",
+    "/lib"
+  ],
+  "oclif": {
+    "bin": "snippetfy",
+    "plugins": [
+      "@oclif/plugin-autocomplete",
+      "@oclif/plugin-help",
+      "@oclif/plugin-not-found"
+    ]
+  },
   "scripts": {
     "build": "npm test && tsc",
+    "oclif:readme": "oclif-dev readme",
+    "docs:cli": "cd docs/_includes/cli/ && node ../../../node_modules/@oclif/dev-cli/bin/run readme && cd -",
     "docs:readme": "cp README.md ./docs/_includes/home.md",
     "docs:typedoc": "typedoc",
     "docs": "npm run docs:readme & npm run docs:typedoc",
@@ -27,6 +45,11 @@
   },
   "homepage": "https://github.com/roxlabs/snippetfy#readme",
   "dependencies": {
+    "@oclif/command": "^1.8.0",
+    "@oclif/config": "^1.17.0",
+    "@oclif/plugin-autocomplete": "^0.3.0",
+    "@oclif/plugin-help": "^3.2.2",
+    "@oclif/plugin-not-found": "^1.2.4",
     "async": "^3.2.0",
     "fast-glob": "^3.2.7",
     "nodegit": "^0.27.0",
@@ -36,6 +59,7 @@
     "@babel/core": "^7.14.8",
     "@babel/preset-env": "^7.14.8",
     "@babel/preset-typescript": "^7.14.5",
+    "@oclif/dev-cli": "^1.26.0",
     "@types/async": "^3.2.7",
     "@types/jest": "^26.0.24",
     "@types/node": "^16.4.2",

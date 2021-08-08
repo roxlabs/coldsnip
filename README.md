@@ -18,7 +18,6 @@ Snippetfy can be used as a library, as a CLI or through direct integrations with
 
 See the [open feature requests](https://github.com/roxlabs/snippetfy/labels/enhancement) for a list of proposed features and join the discussion.
 
-<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
