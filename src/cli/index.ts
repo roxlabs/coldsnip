@@ -28,7 +28,7 @@ class Snippetfy extends Command {
     source: flags.string({
       char: "s",
       required: false,
-      description: "the local path or Git repo URL to fetch files from"
+      description: "the local path or Git repo URL to fetch files from",
     }),
     pattern: flags.string({
       char: "p",
@@ -60,4 +60,4 @@ class Snippetfy extends Command {
   }
 }
 
-export = Snippetfy;
+export default Snippetfy;

@@ -15,7 +15,8 @@ jspm_packages/
 # TypeScript cache
 *.tsbuildinfo
 
-# TypeScript build
+# Library distriburion
+dist/
 lib/
 !.gitkeep
 

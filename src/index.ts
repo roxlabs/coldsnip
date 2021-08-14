@@ -8,4 +8,6 @@ export type {
   Snippets,
 } from "./types";
 
+export { default as cli } from "./cli";
+
 export { extractSnippets };
