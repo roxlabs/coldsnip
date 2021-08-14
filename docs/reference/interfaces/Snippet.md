@@ -25,7 +25,7 @@ The snippet content. Leading spaces are trimmed.
 
 #### Defined in
 
-[types.ts:15](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L15)
+[src/types.ts:15](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L15)
 
 ___
 
@@ -37,7 +37,7 @@ The end line of the snippet.
 
 #### Defined in
 
-[types.ts:13](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L13)
+[src/types.ts:13](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L13)
 
 ___
 
@@ -49,7 +49,7 @@ The source language. It matches the file extension.
 
 #### Defined in
 
-[types.ts:7](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L7)
+[src/types.ts:7](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L7)
 
 ___
 
@@ -61,7 +61,7 @@ The link to the file on the remote Git repo when available.
 
 #### Defined in
 
-[types.ts:17](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L17)
+[src/types.ts:17](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L17)
 
 ___
 
@@ -74,7 +74,7 @@ that might come from the same file extension.
 
 #### Defined in
 
-[types.ts:22](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L22)
+[src/types.ts:22](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L22)
 
 ___
 
@@ -86,7 +86,7 @@ The file path relative to the working directory.
 
 #### Defined in
 
-[types.ts:9](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L9)
+[src/types.ts:9](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L9)
 
 ___
 
@@ -98,4 +98,4 @@ The start line of the snippet.
 
 #### Defined in
 
-[types.ts:11](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L11)
+[src/types.ts:11](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L11)

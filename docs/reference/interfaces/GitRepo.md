@@ -25,7 +25,7 @@ An optional branch name.
 
 #### Defined in
 
-[types.ts:57](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L57)
+[src/types.ts:57](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L57)
 
 ___
 
@@ -37,7 +37,7 @@ The file pattern / glob to match.
 
 #### Defined in
 
-[types.ts:52](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L52)
+[src/types.ts:52](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L52)
 
 ___
 
@@ -49,7 +49,7 @@ The remote Git repository URL.
 
 #### Defined in
 
-[types.ts:50](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L50)
+[src/types.ts:50](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L50)
 
 ___
 
@@ -63,4 +63,4 @@ The directory where the repo should be cloned to.
 
 #### Defined in
 
-[types.ts:62](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L62)
+[src/types.ts:62](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L62)

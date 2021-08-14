@@ -1,6 +1,6 @@
 import { extname as getExtension, relative as getRelativePath } from "path";
-import stripIndent from "strip-indent";
 import { getPermalink } from "./git";
+import { normalizeIndent } from "./indent";
 import type { Snippet } from "./types";
 
 type SnippetInput = {
@@ -38,7 +38,7 @@ export default function createSnippet(input: SnippetInput): Snippet {
   return {
     language: getExtension(input.filePath).slice(1),
     sourcePath,
-    content: stripIndent(content).trim(),
+    content: normalizeIndent(content).trim(),
     startLine: startLine as number,
     endLine,
     permalink,

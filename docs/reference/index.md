@@ -2,6 +2,10 @@
 
 ## Table of contents
 
+### Classes
+
+- [cli](classes/cli.md)
+
 ### Interfaces
 
 - [GitRepo](interfaces/GitRepo.md)
@@ -34,7 +38,7 @@ each supported language.
 
 #### Defined in
 
-[types.ts:31](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L31)
+[src/types.ts:31](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L31)
 
 ___
 
@@ -47,7 +51,7 @@ entry point of the library.
 
 #### Defined in
 
-[types.ts:69](https://github.com/roxlabs/snippetfy/blob/a37309d/src/types.ts#L69)
+[src/types.ts:69](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L69)
 
 ## Functions
 
@@ -83,4 +87,4 @@ or more code snippets.
 
 #### Defined in
 
-[extractSnippets.ts:131](https://github.com/roxlabs/snippetfy/blob/a37309d/src/extractSnippets.ts#L131)
+[src/extractSnippets.ts:131](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/extractSnippets.ts#L131)
