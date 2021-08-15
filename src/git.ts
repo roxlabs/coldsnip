@@ -21,8 +21,10 @@ export async function ensureRepoIsCurrent(
   try {
     repo = await Repository.open(workingDir);
     await repo.checkoutBranch(branch);
-    await repo.fetch("origin");
-    await repo.mergeBranches(branch, `refs/remotes/origin/${branch}`);
+    if (info.pull) {
+      await repo.fetch("origin");
+      await repo.mergeBranches(branch, `refs/remotes/origin/${branch}`);
+    }
   } catch (e) {
     repo = await Clone.clone(info.url, workingDir, {
       checkoutBranch: branch,

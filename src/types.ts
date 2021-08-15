@@ -51,13 +51,18 @@ export interface GitRepo {
   /** The file pattern / glob to match. */
   pattern: string;
   /**
+   * Should pull the latest changes? (merge from origin)
+   * @default false
+   */
+  pull?: boolean;
+  /**
    * An optional branch name.
    * @default "main"
    */
   branch?: string;
   /**
    * The directory where the repo should be cloned to.
-   * @default "$TMP/repoName/branch"
+   * @default "$TMP/$repoName/$branch"
    */
   workingDir?: string;
 }
