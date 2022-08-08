@@ -23,7 +23,7 @@ The relative or absolute path.
 
 #### Defined in
 
-[src/types.ts:41](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/types.ts#L41)
+[src/types.ts:41](https://github.com/roxlabs/snippetfy/blob/baf2cb0/src/types.ts#L41)
 
 ___
 
@@ -35,4 +35,4 @@ The file pattern / glob to match.
 
 #### Defined in
 
-[src/types.ts:43](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/types.ts#L43)
+[src/types.ts:43](https://github.com/roxlabs/snippetfy/blob/baf2cb0/src/types.ts#L43)

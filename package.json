@@ -26,7 +26,7 @@
     "docs:cli": "cd docs/_includes/cli/ && node ../../../node_modules/@oclif/dev-cli/bin/run readme && cd -",
     "docs:readme": "cp README.md ./docs/_includes/home.md",
     "docs:typedoc": "typedoc",
-    "docs": "docs:cli & npm run docs:readme & npm run docs:typedoc",
+    "docs": "npm run docs:cli & npm run docs:readme & npm run docs:typedoc",
     "prettier": "prettier --write \"./**/*.{js,json,ts}\"",
     "test": "jest"
   },

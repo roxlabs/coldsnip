@@ -54,7 +54,7 @@ Command.description
 
 #### Defined in
 
-[src/cli/index.ts:8](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/cli/index.ts#L8)
+[src/cli/index.ts:8](https://github.com/roxlabs/snippetfy/blob/baf2cb0/src/cli/index.ts#L8)
 
 ___
 
@@ -68,7 +68,7 @@ Command.flags
 
 #### Defined in
 
-[src/cli/index.ts:10](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/cli/index.ts#L10)
+[src/cli/index.ts:10](https://github.com/roxlabs/snippetfy/blob/baf2cb0/src/cli/index.ts#L10)
 
 ## Methods
 
@@ -86,4 +86,4 @@ Command.run
 
 #### Defined in
 
-[src/cli/index.ts:42](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/cli/index.ts#L42)
+[src/cli/index.ts:42](https://github.com/roxlabs/snippetfy/blob/baf2cb0/src/cli/index.ts#L42)
