@@ -5,6 +5,7 @@
   "excludeExternals": true,
   "excludeInternal": false,
   "includeVersion": true,
+  "githubPages": false,
   "plugin": ["typedoc-plugin-markdown"],
   "readme": "none",
   "hideGenerator": true,

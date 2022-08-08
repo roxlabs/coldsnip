@@ -14,6 +14,52 @@ This project was motivated by past experiences dealing with outdated or faulty c
 
 Snippetfy can be used as a library, as a CLI or through direct integrations with other platforms. Check the [getting started guide](https://roxlabs.github.io/snippetfy/getting-started/) in order to determine the best option for your needs.
 
+### Library
+
+<!--- @snippet:include(readme.lib) --->
+```ts <!--- extracted from src/__tests__/extractSnippets.spec.ts by snippetfy, do not edit! --->
+const snippets = await extractSnippets([
+  { path: "src/__tests__", pattern: "snippets/twoSnippets.js" },
+]);
+```
+
+The return type is an map between the key and the snippet information, as detailed bellow:
+
+<!--- @snippet:include(readme.types) --->
+```ts <!--- extracted from src/types.ts by snippetfy, do not edit! --->
+/**
+ * Represents a code snippet extracted from a source file. The field
+ * `permalink` is only present when the source is from a Git repository.
+ */
+export interface Snippet {
+  /** The source language. It matches the file extension. */
+  language: string;
+  /** The file path relative to the working directory. */
+  sourcePath: string;
+  /** The start line of the snippet. */
+  startLine: number;
+  /** The end line of the snippet. */
+  endLine: number;
+  /** The snippet content. Leading spaces are trimmed. */
+  content: string;
+  /** The link to the file on the remote Git repo when available. */
+  permalink?: string;
+  /**
+   * An extra qualifier that can be used to differentiate snippets with the same key
+   * that might come from the same file extension.
+   */
+  qualifier?: string;
+}
+
+/**
+ * A map between a `key` and a collection of {@link Snippet} represented by it.
+ * Different snippets can be identified by the same key, which is the case in projects
+ * with support to multiple languages that want to provide samples of the same API in
+ * each supported language.
+ */
+export type Snippets = { [key: string]: Snippet[] };
+```
+
 ## Roadmap
 
 See the [open feature requests](https://github.com/roxlabs/snippetfy/labels/enhancement) for a list of proposed features and join the discussion.

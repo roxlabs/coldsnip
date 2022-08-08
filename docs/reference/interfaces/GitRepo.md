@@ -2,7 +2,9 @@
 
 Represents a Git repository and a matching pattern/glob for files.
 
-**`see`** LocalPath
+**`See`**
+
+LocalPath
 
 ## Table of contents
 
@@ -10,6 +12,7 @@ Represents a Git repository and a matching pattern/glob for files.
 
 - [branch](GitRepo.md#branch)
 - [pattern](GitRepo.md#pattern)
+- [pull](GitRepo.md#pull)
 - [url](GitRepo.md#url)
 - [workingDir](GitRepo.md#workingdir)
 
@@ -21,11 +24,13 @@ Represents a Git repository and a matching pattern/glob for files.
 
 An optional branch name.
 
-**`default`** "main"
+**`Default`**
+
+"main"
 
 #### Defined in
 
-[src/types.ts:57](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L57)
+[src/types.ts:64](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/types.ts#L64)
 
 ___
 
@@ -37,7 +42,23 @@ The file pattern / glob to match.
 
 #### Defined in
 
-[src/types.ts:52](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L52)
+[src/types.ts:54](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/types.ts#L54)
+
+___
+
+### pull
+
+• `Optional` **pull**: `boolean`
+
+Should pull the latest changes? (merge from origin)
+
+**`Default`**
+
+false
+
+#### Defined in
+
+[src/types.ts:59](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/types.ts#L59)
 
 ___
 
@@ -49,7 +70,7 @@ The remote Git repository URL.
 
 #### Defined in
 
-[src/types.ts:50](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L50)
+[src/types.ts:52](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/types.ts#L52)
 
 ___
 
@@ -59,8 +80,10 @@ ___
 
 The directory where the repo should be cloned to.
 
-**`default`** "$TMP/repoName/branch"
+**`Default`**
+
+"$TMP/$repoName/$branch"
 
 #### Defined in
 
-[src/types.ts:62](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L62)
+[src/types.ts:69](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/types.ts#L69)

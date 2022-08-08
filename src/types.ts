@@ -1,3 +1,4 @@
+// @snippet:start(readme.types)
 /**
  * Represents a code snippet extracted from a source file. The field
  * `permalink` is only present when the source is from a Git repository.
@@ -29,6 +30,7 @@ export interface Snippet {
  * each supported language.
  */
 export type Snippets = { [key: string]: Snippet[] };
+// @snippet:end
 
 /**
  * Represents a local directory and a matching pattern/glob for files.

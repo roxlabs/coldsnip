@@ -1,11 +1,8 @@
 import { asyncify, queue } from "async";
-import { once } from "events";
 import glob from "fast-glob";
-import * as fs from "fs";
 import { cpus } from "os";
-import * as path from "path";
-import * as readline from "readline";
 import createSnippet from "./createSnippet";
+import forEachLine from "./forEachLine";
 import { ensureRepoIsCurrent } from "./git";
 import { matchesEndTag, parseStartTag } from "./patterns";
 import type { Snippets, SourcePath, SourceRef } from "./types";
@@ -60,30 +57,24 @@ async function extractSnippetFromFile(
   record: SourceFileRecord
 ): Promise<Snippets> {
   const { filePath, ref } = record;
-  const stream = fs.createReadStream(path.resolve(filePath));
-  const rl = readline.createInterface({
-    input: stream,
-    crlfDelay: Infinity,
-  });
 
   const snippets: Snippets = {};
-  let currentLine = 0;
   let open = false;
   let startLine: number | undefined = undefined;
   let key: string | undefined = undefined;
   let qualifier: string | undefined = undefined;
   let content: string[] = [];
 
-  rl.on("line", (line) => {
-    currentLine++;
-    const openTag = parseStartTag(line);
+  await forEachLine(filePath, (line) => {
+    const { lineContent, lineNumber } = line;
+    const openTag = parseStartTag(lineContent);
     if (!open && openTag) {
       open = true;
       key = openTag.key;
       qualifier = openTag.qualifier;
-      startLine = currentLine + 1;
-    } else if (open && matchesEndTag(line) && key) {
-      const endLine = currentLine - 1;
+      startLine = lineNumber + 1;
+    } else if (open && matchesEndTag(lineContent) && key) {
+      const endLine = lineNumber - 1;
       const { repoUrl, commit, directory } = ref;
       snippets[key] = [
         createSnippet({
@@ -102,11 +93,10 @@ async function extractSnippetFromFile(
       key = undefined;
       content = [];
     } else if (open) {
-      content.push(line);
+      content.push(lineContent);
     }
   });
 
-  await once(rl, "close");
   return snippets;
 }
 
@@ -141,7 +131,7 @@ async function extractSnippets(sources: SourcePath[]): Promise<Snippets> {
   // Find all files, either from local path or a git repo
   const files = await findFiles(sources);
 
-  // TODO: can this be improved?
+  // TODO: how to make this more efficient?
   files.forEach(([paths, ref]) => {
     paths.forEach((filePath) => {
       extractorQueue.push({ filePath, ref });

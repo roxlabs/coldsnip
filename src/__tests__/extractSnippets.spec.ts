@@ -17,9 +17,11 @@ describe("the extractSnippets public API test suite", () => {
   });
 
   it("should extract two snippets", async () => {
+    // @snippet:start(readme.lib)
     const snippets = await extractSnippets([
       { path: "src/__tests__", pattern: "snippets/twoSnippets.js" },
     ]);
+    // @snippet:end
     const keys = Object.keys(snippets);
     expect(keys.length).toBe(2);
     expect(keys[0]).toBe("first");
@@ -56,9 +58,9 @@ describe("the extractSnippets public API test suite", () => {
     const keys = Object.keys(snippets);
     expect(keys.length).toBe(1);
     expect(keys[0]).toBe("multi");
-    const all = snippets["multi"];
+    const all = snippets["multi"] || [];
     expect(all.length).toBe(4);
-    expect(all.find((snippet) => snippet.language === "rb").content).toBe(
+    expect(all.find((snippet) => snippet.language === "rb")?.content).toBe(
       'puts "hello, world"'
     );
   });
@@ -67,9 +69,9 @@ describe("the extractSnippets public API test suite", () => {
     const snippets = await extractSnippets([
       { path: "src/__tests__", pattern: "snippets/indentedContent.html" },
     ]);
-    const all = snippets["indent"];
+    const all = snippets["indent"] || [];
     expect(all.length).toBe(1);
-    expect(all.find((snippet) => snippet.language === "html").content).toBe(
+    expect(all.find((snippet) => snippet.language === "html")?.content).toBe(
       "<div>\n  <span>Indented content should be stripped</span>\n</div>"
     );
   });

@@ -1,6 +1,6 @@
 {
   "name": "snippetfy",
-  "version": "0.7.0",
+  "version": "0.8.1",
   "description": "Extracts code snippets from source files",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -26,7 +26,7 @@
     "docs:cli": "cd docs/_includes/cli/ && node ../../../node_modules/@oclif/dev-cli/bin/run readme && cd -",
     "docs:readme": "cp README.md ./docs/_includes/home.md",
     "docs:typedoc": "typedoc",
-    "docs": "npm run docs:readme & npm run docs:typedoc",
+    "docs": "docs:cli & npm run docs:readme & npm run docs:typedoc",
     "prettier": "prettier --write \"./**/*.{js,json,ts}\"",
     "test": "jest"
   },
@@ -46,13 +46,13 @@
   },
   "homepage": "https://github.com/roxlabs/snippetfy#readme",
   "dependencies": {
-    "@oclif/command": "^1.8.0",
-    "@oclif/config": "^1.17.0",
+    "@oclif/command": "^1.8.16",
+    "@oclif/config": "^1.18.3",
     "@oclif/plugin-autocomplete": "^0.3.0",
-    "@oclif/plugin-help": "^3.2.2",
-    "@oclif/plugin-not-found": "^1.2.4",
-    "async": "^3.2.0",
-    "fast-glob": "^3.2.7",
+    "@oclif/plugin-help": "^3.3.1",
+    "@oclif/plugin-not-found": "^1.2.6",
+    "async": "^3.2.4",
+    "fast-glob": "^3.2.11",
     "nodegit": "^0.27.0"
   },
   "devDependencies": {
@@ -68,13 +68,13 @@
     "cross-env": "^7.0.3",
     "esbuild": "^0.12.19",
     "jest": "^27.0.6",
-    "prettier": "^2.3.2",
+    "prettier": "^2.7.1",
     "rollup": "^2.56.0",
     "rollup-plugin-esbuild": "^4.5.0",
-    "ts-node": "^10.1.0",
-    "tslib": "^2.3.0",
-    "typedoc": "^0.21.5",
-    "typedoc-plugin-markdown": "^3.10.4",
-    "typescript": "^4.3.5"
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.0",
+    "typedoc": "^0.23.8",
+    "typedoc-plugin-markdown": "^3.13.3",
+    "typescript": "^4.7.4"
   }
 }

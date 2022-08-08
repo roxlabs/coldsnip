@@ -2,7 +2,7 @@
 
 ## Hierarchy
 
-- `Command`
+- `default`
 
   ↳ **`cli`**
 
@@ -40,7 +40,7 @@ Command.constructor
 
 #### Defined in
 
-node_modules/@oclif/command/lib/command.d.ts:48
+node_modules/@oclif/command/lib/command.d.ts:49
 
 ## Properties
 
@@ -54,25 +54,13 @@ Command.description
 
 #### Defined in
 
-[src/cli/index.ts:7](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/cli/index.ts#L7)
+[src/cli/index.ts:8](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/cli/index.ts#L8)
 
 ___
 
 ### flags
 
-▪ `Static` **flags**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `config` | `IOptionFlag`<`undefined` \| `string`\> |
-| `format` | `IOptionFlag`<`OutputFormat`\> |
-| `help` | `IBooleanFlag`<`void`\> |
-| `out` | `IOptionFlag`<`string`\> |
-| `pattern` | `IOptionFlag`<`undefined` \| `string`\> |
-| `source` | `IOptionFlag`<`undefined` \| `string`\> |
-| `version` | `IBooleanFlag`<`void`\> |
+▪ `Static` **flags**: `Input`<`any`\>
 
 #### Overrides
 
@@ -80,7 +68,7 @@ Command.flags
 
 #### Defined in
 
-[src/cli/index.ts:9](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/cli/index.ts#L9)
+[src/cli/index.ts:10](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/cli/index.ts#L10)
 
 ## Methods
 
@@ -98,4 +86,4 @@ Command.run
 
 #### Defined in
 
-[src/cli/index.ts:41](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/cli/index.ts#L41)
+[src/cli/index.ts:42](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/cli/index.ts#L42)

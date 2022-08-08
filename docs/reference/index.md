@@ -1,4 +1,4 @@
-# snippetfy - v0.7.0
+# snippetfy - v0.8.0
 
 ## Table of contents
 
@@ -12,16 +12,39 @@
 - [LocalPath](interfaces/LocalPath.md)
 - [Snippet](interfaces/Snippet.md)
 
-### Type aliases
+### Type Aliases
 
+- [LookupOptions](index.md#lookupoptions)
 - [Snippets](index.md#snippets)
 - [SourcePath](index.md#sourcepath)
 
 ### Functions
 
 - [extractSnippets](index.md#extractsnippets)
+- [lookupSnippets](index.md#lookupsnippets)
 
-## Type aliases
+## Type Aliases
+
+### LookupOptions
+
+Ƭ **LookupOptions**: `Object`
+
+Snippet lookup options. The `key` is always required, the other properties
+are useful for matching multi-language snippets indexed by the same key.
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `key` | `string` | the snippet identifier |
+| `language?` | `string` | the snippet source language |
+| `qualifier?` | `string` | the snippet qualifier. Often use to differentiate snippets |
+
+#### Defined in
+
+src/lookupSnippet.ts:7
+
+___
 
 ### Snippets
 
@@ -38,7 +61,7 @@ each supported language.
 
 #### Defined in
 
-[src/types.ts:31](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L31)
+[src/types.ts:32](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/types.ts#L32)
 
 ___
 
@@ -51,7 +74,7 @@ entry point of the library.
 
 #### Defined in
 
-[src/types.ts:69](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/types.ts#L69)
+[src/types.ts:76](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/types.ts#L76)
 
 ## Functions
 
@@ -70,7 +93,9 @@ const snippets = await extractSnippets([
 ]);
 ```
 
-**`name`** extractSnippets
+**`Name`**
+
+extractSnippets
 
 #### Parameters
 
@@ -87,4 +112,32 @@ or more code snippets.
 
 #### Defined in
 
-[src/extractSnippets.ts:131](https://github.com/roxlabs/snippetfy/blob/c7fdbf3/src/extractSnippets.ts#L131)
+[src/extractSnippets.ts:121](https://github.com/roxlabs/snippetfy/blob/2c82c35/src/extractSnippets.ts#L121)
+
+___
+
+### lookupSnippets
+
+▸ **lookupSnippets**(`snippets`, `options`): [`Snippet`](interfaces/Snippet.md) \| `undefined`
+
+Lookup for a specific snippet.
+
+**Implementation note:** in case more than one snippet match the options
+the first matched result will be returned.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `snippets` | [`Snippets`](index.md#snippets) | all extracted snippets |
+| `options` | [`LookupOptions`](index.md#lookupoptions) | the lookup options |
+
+#### Returns
+
+[`Snippet`](interfaces/Snippet.md) \| `undefined`
+
+the matching snippet or `undefined` in case it couldn't be found.
+
+#### Defined in
+
+src/lookupSnippet.ts:26
