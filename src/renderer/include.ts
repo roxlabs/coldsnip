@@ -65,10 +65,7 @@ async function parseFile(input: ParseInput) {
 
           const snippet = lookupSnippet(snippets, tag);
           if (snippet) {
-            const generatedComment = `<!--- extracted from ${snippet.sourcePath} by snippetfy, do not edit! --->`;
-            content.push(
-              indent + CODE_FENCE + snippet.language + " " + generatedComment
-            );
+            content.push(indent + CODE_FENCE + snippet.language);
             content.push(
               ...snippet.content.split("\n").map((value) => indent + value)
             );
