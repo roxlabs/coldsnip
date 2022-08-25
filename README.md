@@ -17,7 +17,7 @@ Snippetfy can be used as a library, as a CLI or through direct integrations with
 ### Library
 
 <!--- @snippet:include(readme.lib) --->
-```ts 
+```ts
 const snippets = await extractSnippets([
   { path: "src/__tests__", pattern: "snippets/twoSnippets.js" },
 ]);
@@ -26,7 +26,7 @@ const snippets = await extractSnippets([
 The return type is an map between the key and the snippet information, as detailed bellow:
 
 <!--- @snippet:include(readme.types) --->
-```ts 
+```ts
 /**
  * Represents a code snippet extracted from a source file. The field
  * `permalink` is only present when the source is from a Git repository.

@@ -42,7 +42,7 @@ are useful for matching multi-language snippets indexed by the same key.
 
 #### Defined in
 
-[src/lookupSnippet.ts:7](https://github.com/roxlabs/snippetfy/blob/a576b88/src/lookupSnippet.ts#L7)
+[src/lookupSnippet.ts:7](https://github.com/roxlabs/snippetfy/blob/db43542/src/lookupSnippet.ts#L7)
 
 ___
 
@@ -61,7 +61,7 @@ each supported language.
 
 #### Defined in
 
-[src/types.ts:32](https://github.com/roxlabs/snippetfy/blob/a576b88/src/types.ts#L32)
+[src/types.ts:32](https://github.com/roxlabs/snippetfy/blob/db43542/src/types.ts#L32)
 
 ___
 
@@ -74,7 +74,7 @@ entry point of the library.
 
 #### Defined in
 
-[src/types.ts:76](https://github.com/roxlabs/snippetfy/blob/a576b88/src/types.ts#L76)
+[src/types.ts:76](https://github.com/roxlabs/snippetfy/blob/db43542/src/types.ts#L76)
 
 ## Functions
 
@@ -112,7 +112,7 @@ or more code snippets.
 
 #### Defined in
 
-[src/extractSnippets.ts:121](https://github.com/roxlabs/snippetfy/blob/a576b88/src/extractSnippets.ts#L121)
+[src/extractSnippets.ts:121](https://github.com/roxlabs/snippetfy/blob/db43542/src/extractSnippets.ts#L121)
 
 ___
 
@@ -140,4 +140,4 @@ the matching snippet or `undefined` in case it couldn't be found.
 
 #### Defined in
 
-[src/lookupSnippet.ts:26](https://github.com/roxlabs/snippetfy/blob/a576b88/src/lookupSnippet.ts#L26)
+[src/lookupSnippet.ts:26](https://github.com/roxlabs/snippetfy/blob/db43542/src/lookupSnippet.ts#L26)
