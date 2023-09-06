@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/Config",
+  "definitions": {
+    "Config": {
+      "type": "object",
+      "properties": {
+        "paths": {
+          "oneOf": [
+            { "$ref": "#/definitions/Path" },
+            { "type": "array", "items": { "$ref": "#/definitions/Path" } }
+          ]
+        }
+      }
+    },
+    "Path": {
+      "oneOf": [
+        { "$ref": "#/definitions/LocalPath" },
+        { "$ref": "#/definitions/RepoPath" }
+      ]
+    },
+    "LocalPath": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "pattern": {
+          "type": "string"
+        }
+      },
+      "required": ["path", "pattern"],
+      "title": "LocalPath"
+    },
+    "RepoPath": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "qt-uri-protocols": ["https"]
+        },
+        "pattern": {
+          "type": "string"
+        }
+      },
+      "required": ["pattern", "url"],
+      "title": "RepoPath"
+    }
+  }
+}
