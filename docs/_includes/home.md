@@ -14,6 +14,11 @@ This project was motivated by past experiences dealing with outdated or faulty c
 
 Snippetfy can be used as a library, as a CLI or through direct integrations with other platforms. Check the [getting started guide](https://roxlabs.github.io/snippetfy/getting-started/) in order to determine the best option for your needs.
 
+### CLI Commands
+
+<!-- commands -->
+<!-- commandsstop -->
+
 ### Library
 
 <!--- @snippet:include(readme.lib) --->

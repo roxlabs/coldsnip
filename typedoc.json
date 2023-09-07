@@ -1,4 +1,5 @@
 {
+  "$schema": "https://typedoc.org/schema.json",
   "out": "docs/reference",
   "entryPoints": ["./src/index.ts"],
   "exclude": ["./src/__tests__/**"],

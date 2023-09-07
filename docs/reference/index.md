@@ -2,10 +2,6 @@
 
 ## Table of contents
 
-### Classes
-
-- [cli](classes/cli.md)
-
 ### Interfaces
 
 - [GitRepo](interfaces/GitRepo.md)
@@ -42,7 +38,7 @@ are useful for matching multi-language snippets indexed by the same key.
 
 #### Defined in
 
-[src/lookupSnippet.ts:7](https://github.com/roxlabs/snippetfy/blob/663a161/src/lookupSnippet.ts#L7)
+[lookupSnippet.ts:7](https://github.com/roxlabs/snippetfy/blob/969d5ca/src/lookupSnippet.ts#L7)
 
 ___
 
@@ -61,7 +57,7 @@ each supported language.
 
 #### Defined in
 
-[src/types.ts:32](https://github.com/roxlabs/snippetfy/blob/663a161/src/types.ts#L32)
+[types.ts:32](https://github.com/roxlabs/snippetfy/blob/969d5ca/src/types.ts#L32)
 
 ___
 
@@ -74,7 +70,7 @@ entry point of the library.
 
 #### Defined in
 
-[src/types.ts:76](https://github.com/roxlabs/snippetfy/blob/663a161/src/types.ts#L76)
+[types.ts:76](https://github.com/roxlabs/snippetfy/blob/969d5ca/src/types.ts#L76)
 
 ## Functions
 
@@ -112,7 +108,7 @@ extractSnippets
 
 #### Defined in
 
-[src/extractSnippets.ts:121](https://github.com/roxlabs/snippetfy/blob/663a161/src/extractSnippets.ts#L121)
+[extractSnippets.ts:121](https://github.com/roxlabs/snippetfy/blob/969d5ca/src/extractSnippets.ts#L121)
 
 ___
 
@@ -140,4 +136,4 @@ the matching snippet or `undefined` in case it couldn't be found.
 
 #### Defined in
 
-[src/lookupSnippet.ts:26](https://github.com/roxlabs/snippetfy/blob/663a161/src/lookupSnippet.ts#L26)
+[lookupSnippet.ts:26](https://github.com/roxlabs/snippetfy/blob/969d5ca/src/lookupSnippet.ts#L26)
