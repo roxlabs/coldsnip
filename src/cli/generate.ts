@@ -91,10 +91,16 @@ class GenerateCommand extends Command {
 
     // TODO: proper error handling for invalid renderer
     // TODO: improve renderer option passing
-    await render(snippets, format as any, outputPath ? {
-      outputDir: outputPath,
-      outputFile: outputPath,
-    } : {});
+    await render(
+      snippets,
+      format as any,
+      outputPath
+        ? {
+            outputDir: outputPath,
+            outputFile: outputPath,
+          }
+        : {},
+    );
   }
 }
 
