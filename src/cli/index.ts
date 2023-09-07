@@ -1,38 +1,37 @@
-import { Command, flags } from "@oclif/command";
+import { Command, Flags } from "@oclif/core";
 import extractSnippets from "../extractSnippets";
 import { render } from "../renderer";
 import { loadConfig } from "./config";
-import { OutputFormat } from "./types";
 
 class Snippetfy extends Command {
-  static description = "describe the command here";
+  static description = "Extract source code snippets from files";
 
-  static flags: flags.Input<any> = {
-    version: flags.version({ char: "v" }),
-    help: flags.help({ char: "h" }),
+  static flags = {
+    version: Flags.version({ char: "v" }),
+    help: Flags.help({ char: "h" }),
     // options
-    out: flags.string({
+    out: Flags.string({
       char: "o",
       description: "the output path",
       default: "./snippets",
     }),
-    format: flags.enum<OutputFormat>({
+    format: Flags.string({
       char: "f",
       description: "the output format",
       options: ["json", "markdown", "include"],
       default: "json",
     }),
-    config: flags.string({
+    config: Flags.string({
       char: "c",
       description: "the path to the config file",
       default: "./snippetfy.json",
     }),
-    source: flags.string({
+    source: Flags.string({
       char: "s",
       required: false,
       description: "the local path or Git repo URL to fetch files from",
     }),
-    pattern: flags.string({
+    pattern: Flags.string({
       char: "p",
       required: false,
       dependsOn: ["source"],
@@ -41,7 +40,7 @@ class Snippetfy extends Command {
   };
 
   async run() {
-    const { flags } = this.parse(Snippetfy);
+    const { flags } = await this.parse(Snippetfy);
     let config = await loadConfig(flags.config);
 
     console.log("run() config is");
@@ -49,7 +48,7 @@ class Snippetfy extends Command {
 
     const paths = config?.paths;
     if (paths) {
-      paths
+      paths;
     }
     // Array.isArray(config?.paths) ? config?.paths : []
 

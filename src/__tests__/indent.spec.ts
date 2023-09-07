@@ -19,7 +19,7 @@ describe("the indent test suite", () => {
 
   it("should remove the extra 2 spaces per line", () => {
     expect(normalizeIndent(CODE_INDENTED_BY_TWO_SPACES)).toEqual(
-      CODE_NO_EXTRA_PAD
+      CODE_NO_EXTRA_PAD,
     );
   });
 });

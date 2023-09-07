@@ -17,7 +17,7 @@ type SourceFileRecord = { filePath: string; ref: SourceRef };
  * @returns a list of tuples, containing their source path and the array of matched files.
  */
 export async function findFiles(
-  sources: SourcePath[]
+  sources: SourcePath[],
 ): Promise<SourceFilesTuple[]> {
   const promises: Array<Promise<SourceFilesTuple>> = [];
   for (const source of sources) {
@@ -27,7 +27,7 @@ export async function findFiles(
         Promise.all([
           glob(source.pattern, { cwd: source.path, absolute: true }),
           Promise.resolve({ directory: source.path }),
-        ])
+        ]),
       );
     } else if ("url" in source) {
       // remote git repos need to be pulled/cloned
@@ -41,7 +41,7 @@ export async function findFiles(
             repoUrl: source.url,
             commit,
           }),
-        ])
+        ]),
       );
     }
   }
@@ -54,7 +54,7 @@ export async function findFiles(
  * @returns
  */
 async function extractSnippetFromFile(
-  record: SourceFileRecord
+  record: SourceFileRecord,
 ): Promise<Snippets> {
   const { filePath, ref } = record;
 

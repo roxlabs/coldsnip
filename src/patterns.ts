@@ -2,11 +2,11 @@ export const COMMENT_TOKEN = /(\/\/|\/\*|#|--|\(\*|<!--|{-|')/;
 export const TAG_TOKEN = /@snippet/;
 
 export const START = new RegExp(
-  `${COMMENT_TOKEN.source}\\s*(?:${TAG_TOKEN.source}:start)\\(([\\S ]+)\\)`
+  `${COMMENT_TOKEN.source}\\s*(?:${TAG_TOKEN.source}:start)\\(([\\S ]+)\\)`,
 );
 const START_KEY_GROUP = 2;
 export const END = new RegExp(
-  `${COMMENT_TOKEN.source}\\s*(?:${TAG_TOKEN.source}:end)`
+  `${COMMENT_TOKEN.source}\\s*(?:${TAG_TOKEN.source}:end)`,
 );
 
 export type OpenTag = {

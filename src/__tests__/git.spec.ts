@@ -39,7 +39,7 @@ describe("the Git repo test suite", () => {
       endLine: 3,
     });
     expect(permalink).toBe(
-      "https://github.com/roxlabs/snippetfy/blob/d16f69f4eb4f46855c66420c02c586138fb38fcf/src/index.ts#L1-L3"
+      "https://github.com/roxlabs/snippetfy/blob/d16f69f4eb4f46855c66420c02c586138fb38fcf/src/index.ts#L1-L3",
     );
   });
 
@@ -52,7 +52,7 @@ describe("the Git repo test suite", () => {
       endLine: 9,
     });
     expect(permalink).toBe(
-      "https://gitlab.com/gitlab-org/gitlab/-/blob/12ecbd8580e13bd385729772102f86bcecfda04f/package.json#L4-9"
+      "https://gitlab.com/gitlab-org/gitlab/-/blob/12ecbd8580e13bd385729772102f86bcecfda04f/package.json#L4-9",
     );
   });
 
@@ -65,7 +65,7 @@ describe("the Git repo test suite", () => {
       endLine: 27,
     });
     expect(permalink).toBe(
-      "https://bitbucket.org/atlassian/npm-publish/src/81c90f7e6b1c0859652bf6bd0dc478d99c37d6ac/test/test.py#lines-22:27"
+      "https://bitbucket.org/atlassian/npm-publish/src/81c90f7e6b1c0859652bf6bd0dc478d99c37d6ac/test/test.py#lines-22:27",
     );
   });
 
