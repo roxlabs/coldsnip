@@ -9,11 +9,11 @@
   },
   "files": [
     "/bin",
+    "/dist",
     "/lib"
   ],
   "oclif": {
-    "bin": "snippetfy",
-    "dirname": "snippetfy",
+    "default": "generate",
     "commands": "./dist/cli",
     "plugins": [
       "@oclif/plugin-help"
@@ -21,14 +21,16 @@
   },
   "scripts": {
     "build:bundle": "rollup -c",
-    "build:compile": "tsc",
-    "build": "npm run test && npm run build:compile && npm run build:bundle",
+    "build:lib": "tsc --project tsconfig.lib.json",
+    "build:cli": "tsc --project tsconfig.cli.json",
+    "build": "npm run build:lib && npm run build:cli",
     "docs:readme": "cp README.md ./docs/_includes/home.md",
-    "docs:snippetfy": "./bin/run",
+    "docs:snippetfy": "./bin/run generate --out docs/snippets.json",
     "docs:typedoc": "typedoc",
     "docs": "npm run docs:cli & npm run docs:readme & npm run docs:typedoc",
     "format:imports": "organize-imports-cli tsconfig.json",
     "format:prettier": "prettier --write \"./**/*.{js,json,ts}\"",
+    "format:check": "prettier --check \"./**/*.{js,json,ts}\"",
     "format": "npm run format:imports && npm run format:prettier",
     "test": "jest"
   },
@@ -60,16 +62,13 @@
     "@oclif/test": "^2.4.7",
     "@types/async": "^3.2.7",
     "@types/jest": "^26.0.24",
-    "@types/node": "^16.4.2",
+    "@types/node": "^18.17.14",
     "babel-jest": "^27.0.6",
     "cross-env": "^7.0.3",
-    "esbuild": "^0.12.19",
     "jest": "^27.0.6",
     "oclif": "^3.14.0",
     "organize-imports-cli": "^0.10.0",
     "prettier": "^3.0.3",
-    "rollup": "^2.56.0",
-    "rollup-plugin-esbuild": "^4.5.0",
     "shx": "^0.3.3",
     "ts-node": "^10.9.1",
     "tslib": "^2.6.2",

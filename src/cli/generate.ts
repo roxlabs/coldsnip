@@ -1,8 +1,8 @@
 import { Command, Flags } from "@oclif/core";
+import { DEFAULT_CONFIG_FILE, loadConfig } from "../config";
 import extractSnippets from "../extractSnippets";
 import { render } from "../renderer";
-import { loadConfig } from "./config";
-import { Config } from "./types";
+import { Config } from "../types";
 
 function parseURL(url: string): URL | undefined {
   try {
@@ -12,8 +12,11 @@ function parseURL(url: string): URL | undefined {
   }
 }
 
-class Snippetfy extends Command {
-  static description = "Extract source code snippets from files";
+const DEFAULT_SOURCE_FILES_PATTERN =
+  "**/*.{js,jsx,ts,tsx,go,java,rb,py,php,cs,sh,sql,kt,yml,yaml,json,md}";
+
+class GenerateCommand extends Command {
+  static description = "Generate code snippets from source files";
 
   static flags = {
     version: Flags.version({ char: "v" }),
@@ -22,7 +25,6 @@ class Snippetfy extends Command {
     out: Flags.string({
       char: "o",
       description: "the output path (directory or file)",
-      default: "./snippets",
     }),
     format: Flags.string({
       char: "f",
@@ -33,7 +35,7 @@ class Snippetfy extends Command {
     config: Flags.string({
       char: "c",
       description: "the path to the config file",
-      default: "./snippetfy.json",
+      default: DEFAULT_CONFIG_FILE,
       exclusive: ["source"],
     }),
     source: Flags.string({
@@ -43,8 +45,6 @@ class Snippetfy extends Command {
     }),
     pattern: Flags.string({
       char: "p",
-      default:
-        "**/*.{js,jsx,ts,tsx,go,java,rb,py,php,cs,sh,sql,kt,yml,yaml,json,md}",
       required: false,
       dependsOn: ["source"],
       description: "the file match pattern, e.g. src/**/*.js",
@@ -52,11 +52,16 @@ class Snippetfy extends Command {
   };
 
   async run() {
-    const { flags } = await this.parse(Snippetfy);
-    const { config, source, pattern, format, out: outputPath } = flags;
+    const { flags } = await this.parse(GenerateCommand);
+    const {
+      config,
+      source,
+      pattern = DEFAULT_SOURCE_FILES_PATTERN,
+      format,
+      out: outputPath,
+    } = flags;
     let parsedConfig: Config | undefined;
     if (typeof source === "string") {
-      console.log("Let's parse the source flag");
       const url = parseURL(source);
       parsedConfig = {
         paths: url
@@ -64,14 +69,12 @@ class Snippetfy extends Command {
           : { path: source, pattern: pattern },
       };
     } else if (config) {
-      console.log("Let's load the config file");
       parsedConfig = await loadConfig(flags.config);
       if (!parsedConfig) {
         console.error(`Could not load config file: ${flags.config}`);
         process.exit(1);
       }
     }
-    console.log("Here's the config: ", parsedConfig);
 
     if (!parsedConfig) {
       console.error(
@@ -88,11 +91,11 @@ class Snippetfy extends Command {
 
     // TODO: proper error handling for invalid renderer
     // TODO: improve renderer option passing
-    await render(snippets, format as any, {
+    await render(snippets, format as any, outputPath ? {
       outputDir: outputPath,
       outputFile: outputPath,
-    });
+    } : {});
   }
 }
 
-export default Snippetfy;
+export default GenerateCommand;

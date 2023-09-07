@@ -1,5 +1,5 @@
 {
-  "$schema": "./src/cli/options.schema.json",
+  "$schema": "./config.schema.json",
   "paths": {
     "path": "./",
     "pattern": "./src/**/*.ts"
