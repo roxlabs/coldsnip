@@ -4,7 +4,7 @@ export function resolvePadLength(content: string): number {
   if (match) {
     length = match.reduce(
       (previous, current) => Math.min(previous, current.length),
-      Infinity
+      Infinity,
     );
   }
   return length;

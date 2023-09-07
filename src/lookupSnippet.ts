@@ -1,4 +1,4 @@
-import { Snippets, Snippet } from "./types";
+import { Snippet, Snippets } from "./types";
 
 /**
  * Snippet lookup options. The `key` is always required, the other properties
@@ -25,7 +25,7 @@ export type LookupOptions = {
  */
 function lookupSnippet(
   snippets: Snippets,
-  options: LookupOptions
+  options: LookupOptions,
 ): Snippet | undefined {
   const { key, language, qualifier } = options;
   const matchedSnippets = snippets[key];

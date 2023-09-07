@@ -67,7 +67,7 @@ async function parseFile(input: ParseInput) {
           if (snippet) {
             content.push(indent + CODE_FENCE + snippet.language);
             content.push(
-              ...snippet.content.split("\n").map((value) => indent + value)
+              ...snippet.content.split("\n").map((value) => indent + value),
             );
             content.push(indent + CODE_FENCE);
           } else {

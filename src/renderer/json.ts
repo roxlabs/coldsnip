@@ -8,7 +8,7 @@ type Options = {
 };
 
 const DEFAULT_OPTIONS: Options = {
-  outputFile: "./snippets.json",
+  outputFile: "./.snippetfy/snippets.json",
   indentSize: 2,
 };
 
@@ -16,7 +16,7 @@ export default class JsonRenderer implements Renderer {
   private options: Options;
 
   constructor(options: Partial<Options>) {
-    this.options = { ...options, ...DEFAULT_OPTIONS };
+    this.options = { ...DEFAULT_OPTIONS, ...options };
   }
 
   async render(snippets: Snippets) {

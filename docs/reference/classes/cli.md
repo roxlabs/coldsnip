@@ -2,7 +2,7 @@
 
 ## Hierarchy
 
-- `default`
+- `Command`
 
   ↳ **`cli`**
 
@@ -32,7 +32,7 @@
 | Name | Type |
 | :------ | :------ |
 | `argv` | `string`[] |
-| `config` | `IConfig` |
+| `config` | `Config` |
 
 #### Inherited from
 
@@ -40,13 +40,13 @@ Command.constructor
 
 #### Defined in
 
-node_modules/@oclif/command/lib/command.d.ts:49
+node_modules/@oclif/core/lib/command.d.ts:93
 
 ## Properties
 
 ### description
 
-▪ `Static` **description**: `string` = `"describe the command here"`
+▪ `Static` **description**: `string` = `"Extract source code snippets from files"`
 
 #### Overrides
 
@@ -54,13 +54,25 @@ Command.description
 
 #### Defined in
 
-[src/cli/index.ts:8](https://github.com/roxlabs/snippetfy/blob/db43542/src/cli/index.ts#L8)
+[src/cli/index.ts:7](https://github.com/roxlabs/snippetfy/blob/663a161/src/cli/index.ts#L7)
 
 ___
 
 ### flags
 
-▪ `Static` **flags**: `Input`<`any`\>
+▪ `Static` **flags**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `config` | `OptionFlag`<`string`, `CustomOptions`\> |
+| `format` | `OptionFlag`<`string`, `CustomOptions`\> |
+| `help` | `BooleanFlag`<`void`\> |
+| `out` | `OptionFlag`<`string`, `CustomOptions`\> |
+| `pattern` | `OptionFlag`<`undefined` \| `string`, `CustomOptions`\> |
+| `source` | `OptionFlag`<`undefined` \| `string`, `CustomOptions`\> |
+| `version` | `BooleanFlag`<`void`\> |
 
 #### Overrides
 
@@ -68,7 +80,7 @@ Command.flags
 
 #### Defined in
 
-[src/cli/index.ts:10](https://github.com/roxlabs/snippetfy/blob/db43542/src/cli/index.ts#L10)
+[src/cli/index.ts:9](https://github.com/roxlabs/snippetfy/blob/663a161/src/cli/index.ts#L9)
 
 ## Methods
 
@@ -86,4 +98,4 @@ Command.run
 
 #### Defined in
 
-[src/cli/index.ts:43](https://github.com/roxlabs/snippetfy/blob/db43542/src/cli/index.ts#L43)
+[src/cli/index.ts:42](https://github.com/roxlabs/snippetfy/blob/663a161/src/cli/index.ts#L42)
