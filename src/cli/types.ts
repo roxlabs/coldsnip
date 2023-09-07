@@ -5,5 +5,5 @@ export type OutputFormat = "json" | "markdown" | "include";
 export type SnippetTransformer = (snippets: Snippets) => Promise<void>;
 
 export interface Config {
-  paths?: SourcePath | SourcePath[];
+  paths: SourcePath | SourcePath[];
 }

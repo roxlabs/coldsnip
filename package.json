@@ -23,7 +23,6 @@
     "build:bundle": "rollup -c",
     "build:compile": "tsc",
     "build": "npm run test && npm run build:compile && npm run build:bundle",
-    "docs:cli": "cd docs/_includes/cli/ && node ../../../node_modules/@oclif/dev-cli/bin/run readme && cd -",
     "docs:readme": "cp README.md ./docs/_includes/home.md",
     "docs:snippetfy": "./bin/run",
     "docs:typedoc": "typedoc",

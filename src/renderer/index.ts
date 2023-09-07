@@ -13,8 +13,12 @@ const renderers: Record<RendererKey, RendererType> = {
   markdown: MarkdownRenderer,
 };
 
-export async function render(snippets: Snippets, format: RendererKey) {
+export async function render(
+  snippets: Snippets,
+  format: RendererKey,
+  options: any,
+) {
   const Renderer = renderers[format];
-  const renderer = new Renderer({});
+  const renderer = new Renderer(options);
   await renderer.render(snippets);
 }
