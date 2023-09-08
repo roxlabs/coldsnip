@@ -23,6 +23,7 @@ export async function findFiles(
   for (const source of sources) {
     if ("path" in source) {
       // local directories are straighforward to handle
+      // TODO: get git info if available
       promises.push(
         Promise.all([
           glob(source.pattern, { cwd: source.path, absolute: true }),
