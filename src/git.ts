@@ -56,10 +56,59 @@ async function cloneAndCheckout(
   await execCommand(command);
 }
 
-async function getHeadCommitId(): Promise<string> {
+export async function getHeadCommitId(): Promise<string> {
   const command = `git rev-parse HEAD`;
   const { stdout } = await execCommand(command);
   return stdout.trim();
+}
+
+/**
+ * Retrieves the URL of the 'origin' remote for a given Git repository.
+ *
+ * @param repoDir The directory where the Git repository is located.
+ * @returns A promise that resolves with the URL, or rejects with an error.
+ */
+export async function getOriginRemoteURL(
+  dir: string,
+): Promise<string | undefined> {
+  try {
+    const command = "git config --get remote.origin.url";
+    const { stdout } = await execCommand(command, { cwd: dir });
+    return stdout.trim().replace(/\.git$/, "");
+  } catch (error) {
+    return undefined;
+  }
+}
+
+/**
+ * Checks whether Git is installed on the system.
+ *
+ * @returns A promise that resolves with a boolean indicating whether Git is installed.
+ */
+async function isGitAvailable(): Promise<boolean> {
+  try {
+    const { stdout } = await execCommand("git --version");
+    return stdout.trim().startsWith("git version");
+  } catch (error) {
+    return false;
+  }
+}
+
+export type GitInfo = {
+  repoUrl?: string;
+  commit?: string;
+};
+
+export async function getLocalRepoInfo(path: string): Promise<GitInfo> {
+  const isAvailable = await isGitAvailable();
+  if (!isAvailable) {
+    return {};
+  }
+  const [repoUrl, commit] = await Promise.all([
+    getOriginRemoteURL(path),
+    getHeadCommitId(),
+  ]);
+  return { repoUrl, commit };
 }
 
 async function isDirectory(path: string): Promise<boolean> {

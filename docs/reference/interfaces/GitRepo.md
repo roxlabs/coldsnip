@@ -32,7 +32,7 @@ An optional branch name.
 
 #### Defined in
 
-[types.ts:64](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/types.ts#L64)
+[types.ts:64](https://github.com/roxlabs/coldsnip/blob/8db7009/src/types.ts#L64)
 
 ___
 
@@ -44,7 +44,7 @@ The file pattern / glob to match.
 
 #### Defined in
 
-[types.ts:54](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/types.ts#L54)
+[types.ts:54](https://github.com/roxlabs/coldsnip/blob/8db7009/src/types.ts#L54)
 
 ___
 
@@ -62,7 +62,7 @@ false
 
 #### Defined in
 
-[types.ts:59](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/types.ts#L59)
+[types.ts:59](https://github.com/roxlabs/coldsnip/blob/8db7009/src/types.ts#L59)
 
 ___
 
@@ -74,7 +74,7 @@ The remote Git repository URL.
 
 #### Defined in
 
-[types.ts:52](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/types.ts#L52)
+[types.ts:52](https://github.com/roxlabs/coldsnip/blob/8db7009/src/types.ts#L52)
 
 ___
 
@@ -92,4 +92,4 @@ The directory where the repo should be cloned to.
 
 #### Defined in
 
-[types.ts:69](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/types.ts#L69)
+[types.ts:69](https://github.com/roxlabs/coldsnip/blob/8db7009/src/types.ts#L69)

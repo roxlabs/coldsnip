@@ -3,7 +3,7 @@ import glob from "fast-glob";
 import { cpus } from "os";
 import createSnippet from "./createSnippet";
 import forEachLine from "./forEachLine";
-import { ensureRepoIsCurrent } from "./git";
+import { ensureRepoIsCurrent, getLocalRepoInfo } from "./git";
 import { matchesEndTag, parseStartTag } from "./patterns";
 import type { Snippets, SourcePath, SourceRef } from "./types";
 
@@ -22,16 +22,16 @@ export async function findFiles(
   const promises: Array<Promise<SourceFilesTuple>> = [];
   for (const source of sources) {
     if ("path" in source) {
-      // local directories are straighforward to handle
-      // TODO: get git info if available
+      // when in local paths, try to get git info if possible
+      const { repoUrl, commit } = await getLocalRepoInfo(source.path);
       promises.push(
         Promise.all([
           glob(source.pattern, { cwd: source.path, absolute: true }),
-          Promise.resolve({ directory: source.path }),
+          Promise.resolve({ directory: source.path, repoUrl, commit }),
         ]),
       );
     } else if ("url" in source) {
-      // remote git repos need to be pulled/cloned
+      // remote git repos need to be cloned
       const ref = await ensureRepoIsCurrent(source);
       const { workingDir, commit } = ref;
       promises.push(

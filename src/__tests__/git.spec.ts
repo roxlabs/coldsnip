@@ -1,7 +1,12 @@
 import { existsSync, rmSync as removePath } from "fs";
 import { tmpdir } from "os";
 import { resolve as resolvePath } from "path";
-import { ensureRepoIsCurrent, getPermalink, getRepoPath } from "../git";
+import {
+  ensureRepoIsCurrent,
+  getLocalRepoInfo,
+  getPermalink,
+  getRepoPath,
+} from "../git";
 
 describe("the Git repo test suite", () => {
   const workingDir = resolvePath(tmpdir(), "coldsnip-git-test");
@@ -79,5 +84,11 @@ describe("the Git repo test suite", () => {
         endLine: 2,
       });
     }).toThrow(/provider not yet supported/);
+  });
+
+  it("should get the repo url and head commit correctly", async () => {
+    const { repoUrl, commit } = await getLocalRepoInfo(".");
+    expect(repoUrl).toBe("https://github.com/roxlabs/coldsnip");
+    expect(commit).toBeDefined();
   });
 });

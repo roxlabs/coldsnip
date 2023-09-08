@@ -23,7 +23,7 @@ The relative or absolute path.
 
 #### Defined in
 
-[types.ts:41](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/types.ts#L41)
+[types.ts:41](https://github.com/roxlabs/coldsnip/blob/8db7009/src/types.ts#L41)
 
 ___
 
@@ -35,4 +35,4 @@ The file pattern / glob to match.
 
 #### Defined in
 
-[types.ts:43](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/types.ts#L43)
+[types.ts:43](https://github.com/roxlabs/coldsnip/blob/8db7009/src/types.ts#L43)
