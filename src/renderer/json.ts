@@ -8,7 +8,7 @@ type Options = {
 };
 
 const DEFAULT_OPTIONS: Options = {
-  outputFile: "./.snippetfy/snippets.json",
+  outputFile: "./.coldsnip/snippets.json",
   indentSize: 2,
 };
 

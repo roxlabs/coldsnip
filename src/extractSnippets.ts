@@ -108,7 +108,7 @@ async function extractSnippetFromFile(
  * ```js
  * const snippets = await extractSnippets([
  *   { path: "~/dev/projects/local", pattern: "*.js" },
- *   { url: "https://github.com/roxlabs/snippetfy", pattern: "*.ts" },
+ *   { url: "https://github.com/roxlabs/coldsnip", pattern: "*.ts" },
  * ]);
  * ```
  *

@@ -2,7 +2,7 @@ import { readFile } from "fs/promises";
 import { resolve } from "path";
 import { Config } from "./types";
 
-export const DEFAULT_CONFIG_FILE = "./.snippetfy/config.json";
+export const DEFAULT_CONFIG_FILE = "./coldsnip.json";
 
 export async function loadConfig(
   file: string = DEFAULT_CONFIG_FILE,

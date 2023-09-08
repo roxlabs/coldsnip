@@ -7,19 +7,19 @@ has_children: true
 
 # Getting started
 
-For most use cases, using the Snippetfy CLI is the easiest way to go. You can also use it programmatically if your goal is to integrate with other systems or create a plugin for your favorite Markdown parser or static site generator.
+For most use cases, using the Coldsnip CLI is the easiest way to go. You can also use it programmatically if your goal is to integrate with other systems or create a plugin for your favorite Markdown parser or static site generator.
 
 Let's explore those two options.
 
 ## CLI
 
 ```
-snippetfy --format markdown --out snippets/ 
+coldsnip --format markdown --out snippets/
 ```
 
 ### Config file
 
-In order to `.snippetfy.js` 
+In order to `.coldsnip.js`
 
 ```js
 module.exports = {

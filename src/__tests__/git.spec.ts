@@ -4,11 +4,11 @@ import { resolve as resolvePath } from "path";
 import { ensureRepoIsCurrent, getPermalink, getRepoPath } from "../git";
 
 describe("the Git repo test suite", () => {
-  const workingDir = resolvePath(tmpdir(), "snippetfy-git-test");
+  const workingDir = resolvePath(tmpdir(), "coldsnip-git-test");
 
   it("should get the repo name from the Git HTTPS URL", () => {
-    const url = "https://github.com/roxlabs/snippetfy";
-    expect(getRepoPath(url)).toBe("/roxlabs/snippetfy");
+    const url = "https://github.com/roxlabs/coldsnip";
+    expect(getRepoPath(url)).toBe("/roxlabs/coldsnip");
   });
 
   it("should ensure the main branch of the repo is newly cloned", async () => {
@@ -32,14 +32,14 @@ describe("the Git repo test suite", () => {
 
   it("should resolve the permalink for GitHub repos", () => {
     const permalink = getPermalink({
-      repoUrl: "https://github.com/roxlabs/snippetfy",
+      repoUrl: "https://github.com/roxlabs/coldsnip",
       commit: "d16f69f4eb4f46855c66420c02c586138fb38fcf",
       path: "src/index.ts",
       startLine: 1,
       endLine: 3,
     });
     expect(permalink).toBe(
-      "https://github.com/roxlabs/snippetfy/blob/d16f69f4eb4f46855c66420c02c586138fb38fcf/src/index.ts#L1-L3",
+      "https://github.com/roxlabs/coldsnip/blob/d16f69f4eb4f46855c66420c02c586138fb38fcf/src/index.ts#L1-L3",
     );
   });
 

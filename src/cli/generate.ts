@@ -18,6 +18,8 @@ const DEFAULT_SOURCE_FILES_PATTERN =
 class GenerateCommand extends Command {
   static description = "Generate code snippets from source files";
 
+  static aliases = ["gen", "g"];
+
   static flags = {
     version: Flags.version({ char: "v" }),
     help: Flags.help({ char: "h" }),

@@ -15,7 +15,7 @@ type ProcessingInput = {
 };
 
 const DEFAULT_OPTIONS: Options = {
-  outputDir: "./snippetfy/",
+  outputDir: "./coldsnip/",
 };
 
 function codeBlock(snippet: Snippet): string {

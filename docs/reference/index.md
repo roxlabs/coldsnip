@@ -1,4 +1,4 @@
-# snippetfy - v0.8.1
+# coldsnip - v0.9.0-alpha.0
 
 ## Table of contents
 
@@ -38,7 +38,7 @@ are useful for matching multi-language snippets indexed by the same key.
 
 #### Defined in
 
-[lookupSnippet.ts:7](https://github.com/roxlabs/snippetfy/blob/969d5ca/src/lookupSnippet.ts#L7)
+[lookupSnippet.ts:7](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/lookupSnippet.ts#L7)
 
 ___
 
@@ -57,7 +57,7 @@ each supported language.
 
 #### Defined in
 
-[types.ts:32](https://github.com/roxlabs/snippetfy/blob/969d5ca/src/types.ts#L32)
+[types.ts:32](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/types.ts#L32)
 
 ___
 
@@ -70,7 +70,7 @@ entry point of the library.
 
 #### Defined in
 
-[types.ts:76](https://github.com/roxlabs/snippetfy/blob/969d5ca/src/types.ts#L76)
+[types.ts:76](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/types.ts#L76)
 
 ## Functions
 
@@ -85,7 +85,7 @@ will be parsed and extracted into an indexed data structure (represented by [Sni
 ```js
 const snippets = await extractSnippets([
   { path: "~/dev/projects/local", pattern: "*.js" },
-  { url: "https://github.com/roxlabs/snippetfy", pattern: "*.ts" },
+  { url: "https://github.com/roxlabs/coldsnip", pattern: "*.ts" },
 ]);
 ```
 
@@ -108,7 +108,7 @@ extractSnippets
 
 #### Defined in
 
-[extractSnippets.ts:121](https://github.com/roxlabs/snippetfy/blob/969d5ca/src/extractSnippets.ts#L121)
+[extractSnippets.ts:121](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/extractSnippets.ts#L121)
 
 ___
 
@@ -136,4 +136,4 @@ the matching snippet or `undefined` in case it couldn't be found.
 
 #### Defined in
 
-[lookupSnippet.ts:26](https://github.com/roxlabs/snippetfy/blob/969d5ca/src/lookupSnippet.ts#L26)
+[lookupSnippet.ts:26](https://github.com/roxlabs/coldsnip/blob/3e3785d/src/lookupSnippet.ts#L26)

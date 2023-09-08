@@ -19,7 +19,7 @@ export async function ensureRepoIsCurrent(
   const repoPath = getRepoPath(info.url);
   const branch = info.branch ?? "main";
   const workingDir =
-    info.workingDir ?? path.join(os.tmpdir(), ".snippetfy", repoPath, branch);
+    info.workingDir ?? path.join(os.tmpdir(), ".coldsnip", repoPath, branch);
 
   await cloneAndCheckout(info.url, workingDir, branch);
   const commit = await getHeadCommitId();

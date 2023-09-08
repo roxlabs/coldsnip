@@ -1,11 +1,11 @@
 {
-  "name": "snippetfy",
+  "name": "coldsnip",
   "version": "0.9.0-alpha.0",
   "description": "Extracts code snippets from source files",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "bin": {
-    "snippetfy": "./bin/run"
+    "snip": "./bin/run"
   },
   "files": [
     "/bin",
@@ -13,6 +13,7 @@
     "/lib"
   ],
   "oclif": {
+    "bin": "snip",
     "default": "generate",
     "commands": "./dist/cli",
     "plugins": [
@@ -25,7 +26,7 @@
     "build:cli": "tsc --project tsconfig.cli.json",
     "build": "npm run build:lib && npm run build:cli",
     "docs:readme": "cp README.md ./docs/_includes/home.md",
-    "docs:snippetfy": "./bin/run generate --out docs/snippets.json",
+    "docs:coldsnip": "./bin/run generate --out docs/snippets.json",
     "docs:typedoc": "typedoc --tsconfig tsconfig.lib.json",
     "docs": "npm run docs:readme & npm run docs:typedoc",
     "format:imports": "organize-imports-cli tsconfig.json",
@@ -36,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/roxlabs/snippetfy.git"
+    "url": "git+https://github.com/roxlabs/coldsnip.git"
   },
   "keywords": [
     "snippet",
@@ -46,9 +47,9 @@
   "author": "Daniel Rochetti",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/roxlabs/snippetfy/issues"
+    "url": "https://github.com/roxlabs/coldsnip/issues"
   },
-  "homepage": "https://github.com/roxlabs/snippetfy#readme",
+  "homepage": "https://github.com/roxlabs/coldsnip#readme",
   "dependencies": {
     "@oclif/core": "^2",
     "@oclif/plugin-help": "^5",
