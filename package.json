@@ -10,7 +10,10 @@
   "files": [
     "/bin",
     "/dist",
-    "/lib"
+    "/lib",
+    "/README.md",
+    "/LICENSE",
+    "config.schema.json"
   ],
   "oclif": {
     "bin": "coldsnip",
