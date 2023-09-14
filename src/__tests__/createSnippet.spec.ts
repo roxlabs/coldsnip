@@ -22,6 +22,7 @@ describe("the createSnippet test suite", () => {
       endLine: 2,
       content: "content",
     });
+    expect(snippet.filename).toBe("index.ts");
     expect(snippet.permalink).toBeDefined();
   });
 });

@@ -8,6 +8,8 @@ export interface Snippet {
   language: string;
   /** The file path relative to the working directory. */
   sourcePath: string;
+  /** The name of the file, derived from `sourcePath`. */
+  filename: string;
   /** The start line of the snippet. */
   startLine: number;
   /** The end line of the snippet. */

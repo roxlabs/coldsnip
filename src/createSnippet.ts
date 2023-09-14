@@ -38,6 +38,7 @@ export default function createSnippet(input: SnippetInput): Snippet {
   return {
     language: getExtension(input.filePath).slice(1),
     sourcePath,
+    filename: filePath.split("/").pop() as string,
     content: normalizeIndent(content).trim(),
     startLine: startLine as number,
     endLine,
