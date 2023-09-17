@@ -77,11 +77,9 @@ describe("the extractSnippets public API test suite", () => {
   });
 
   it("should extract a snippet with a highlighted line", async () => {
-    console.time("extract snippets");
     const snippets = await extractSnippets([
       { path: "src/__tests__", pattern: "snippets/highlights.ts" },
     ]);
-    console.timeEnd("extract snippets");
     const snippet = snippets["highlight.singleline"][0];
     expect(snippet).toBeDefined();
     expect(snippet.highlightedLines).toEqual([2]);
@@ -102,7 +100,6 @@ describe("the extractSnippets public API test suite", () => {
     ]);
     const snippet = snippets["highlight.multiple"][0];
     expect(snippet).toBeDefined();
-    console.log(snippet.content);
     expect(snippet.highlightedLines).toEqual([2, 3, 7]);
   });
 

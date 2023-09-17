@@ -62,6 +62,6 @@ describe("the pattern matching test suite", () => {
     expect(parseValue("1")).toBe(1);
     expect(parseValue("1.2")).toBe(1.2);
     expect(parseValue(`"hello"`)).toBe("hello");
-    expect(parseValue("value")).toThrowError();
+    expect(() => parseValue("value")).toThrowError();
   });
 });
