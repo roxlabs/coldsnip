@@ -14,6 +14,8 @@ export interface Snippet {
   startLine: number;
   /** The end line of the snippet. */
   endLine: number;
+  /** The lines to be highlighted, if any. */
+  highlightedLines: number[];
   /** The snippet content. Leading spaces are trimmed. */
   content: string;
   /** The link to the file on the remote Git repo when available. */

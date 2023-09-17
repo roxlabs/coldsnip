@@ -2,8 +2,9 @@
 
 Coldsnip extracts code snippets from codebases to ensure code embeded on documentation, blog posts and books are always *correct* and *up-to-date*. Stop writing code on Markdown and HTML files and focus on working samples.
 
-
-![NPM](https://img.shields.io/npm/v/@coldsnip/core?style=flat-square)
+![GitHub Build Status](https://img.shields.io/github/actions/workflow/status/roxlabs/coldsnip/build.yml?style=flat-square)
+![Coldsnip on NPM](https://img.shields.io/npm/v/coldsnip?style=flat-square&label=coldsnip)
+![License](https://img.shields.io/github/license/roxlabs/coldsnip?style=flat-square)
 
 
 ## About the project

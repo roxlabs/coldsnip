@@ -1,3 +1,3 @@
-// @snippet:start(multi)
+// @snippet:start("multi")
 println("hello, world")
 // @snippet:end

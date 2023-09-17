@@ -1,12 +1,12 @@
 function drawLighsaber() {
-  // @snippet:start(first)
+  // @snippet:start("first")
   const lightsaber = new Lightsaber();
   luke.draw(lightsaber);
   luke.swingLightsaber();
   // @snippet:end
 }
 
-// @snippet:start(second,qualifier)
+// @snippet:start("second", qualifier: "force")
 function useForce() {
   luke.concentrate();
   luke.feelTheForce();

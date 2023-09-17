@@ -12,6 +12,7 @@ type SnippetInput = {
   qualifier?: string;
   commit?: string;
   repoUrl?: string;
+  highlightedLines?: number[];
 };
 export default function createSnippet(input: SnippetInput): Snippet {
   const {
@@ -23,6 +24,7 @@ export default function createSnippet(input: SnippetInput): Snippet {
     repoUrl,
     commit,
     qualifier,
+    highlightedLines = [],
   } = input;
   const sourcePath = getRelativePath(directory, filePath);
   const permalink =
@@ -44,5 +46,6 @@ export default function createSnippet(input: SnippetInput): Snippet {
     endLine,
     permalink,
     qualifier,
+    highlightedLines,
   };
 }
