@@ -1,4 +1,4 @@
-# coldsnip - v0.9.0-alpha.1
+# coldsnip - v0.9.0-alpha.3
 
 ## Table of contents
 
@@ -38,7 +38,7 @@ are useful for matching multi-language snippets indexed by the same key.
 
 #### Defined in
 
-[lookupSnippet.ts:7](https://github.com/roxlabs/coldsnip/blob/8db7009/src/lookupSnippet.ts#L7)
+[lookupSnippet.ts:7](https://github.com/roxlabs/coldsnip/blob/f9e1b95/src/lookupSnippet.ts#L7)
 
 ___
 
@@ -57,7 +57,7 @@ each supported language.
 
 #### Defined in
 
-[types.ts:32](https://github.com/roxlabs/coldsnip/blob/8db7009/src/types.ts#L32)
+[types.ts:36](https://github.com/roxlabs/coldsnip/blob/f9e1b95/src/types.ts#L36)
 
 ___
 
@@ -70,7 +70,7 @@ entry point of the library.
 
 #### Defined in
 
-[types.ts:76](https://github.com/roxlabs/coldsnip/blob/8db7009/src/types.ts#L76)
+[types.ts:80](https://github.com/roxlabs/coldsnip/blob/f9e1b95/src/types.ts#L80)
 
 ## Functions
 
@@ -108,7 +108,7 @@ extractSnippets
 
 #### Defined in
 
-[extractSnippets.ts:122](https://github.com/roxlabs/coldsnip/blob/8db7009/src/extractSnippets.ts#L122)
+[extractSnippets.ts:217](https://github.com/roxlabs/coldsnip/blob/f9e1b95/src/extractSnippets.ts#L217)
 
 ___
 
@@ -136,4 +136,4 @@ the matching snippet or `undefined` in case it couldn't be found.
 
 #### Defined in
 
-[lookupSnippet.ts:26](https://github.com/roxlabs/coldsnip/blob/8db7009/src/lookupSnippet.ts#L26)
+[lookupSnippet.ts:26](https://github.com/roxlabs/coldsnip/blob/f9e1b95/src/lookupSnippet.ts#L26)

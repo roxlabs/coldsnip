@@ -12,6 +12,7 @@ type SnippetInput = {
   qualifier?: string;
   commit?: string;
   repoUrl?: string;
+  highlightedLines?: number[];
 };
 export default function createSnippet(input: SnippetInput): Snippet {
   const {
@@ -23,6 +24,7 @@ export default function createSnippet(input: SnippetInput): Snippet {
     repoUrl,
     commit,
     qualifier,
+    highlightedLines = [],
   } = input;
   const sourcePath = getRelativePath(directory, filePath);
   const permalink =
@@ -38,10 +40,12 @@ export default function createSnippet(input: SnippetInput): Snippet {
   return {
     language: getExtension(input.filePath).slice(1),
     sourcePath,
+    filename: filePath.split("/").pop() as string,
     content: normalizeIndent(content).trim(),
     startLine: startLine as number,
     endLine,
     permalink,
     qualifier,
+    highlightedLines,
   };
 }

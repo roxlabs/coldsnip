@@ -1,3 +1,3 @@
 # @snippet:start("multi")
-puts "hello, world"
+print("Hello World!")
 # @snippet:end

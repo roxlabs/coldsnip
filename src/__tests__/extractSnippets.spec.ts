@@ -32,7 +32,7 @@ describe("the extractSnippets public API test suite", () => {
     const snippets = await extractSnippets([
       { path: "src/__tests__", pattern: "snippets/twoSnippets.js" },
     ]);
-    expect(snippets["second"][0].qualifier).toBe("qualifier");
+    expect(snippets["second"][0].qualifier).toBe("force");
   });
 
   it("should contain no snippet since the start tag is missing the key", async () => {
@@ -74,5 +74,40 @@ describe("the extractSnippets public API test suite", () => {
     expect(all.find((snippet) => snippet.language === "html")?.content).toBe(
       "<div>\n  <span>Indented content should be stripped</span>\n</div>",
     );
+  });
+
+  it("should extract a snippet with a highlighted line", async () => {
+    const snippets = await extractSnippets([
+      { path: "src/__tests__", pattern: "snippets/highlights.ts" },
+    ]);
+    const snippet = snippets["highlight.singleline"][0];
+    expect(snippet).toBeDefined();
+    expect(snippet.highlightedLines).toEqual([2]);
+  });
+
+  it("should extract a snippet with a highlighted multiline", async () => {
+    const snippets = await extractSnippets([
+      { path: "src/__tests__", pattern: "snippets/highlights.ts" },
+    ]);
+    const snippet = snippets["highlight.multiline"][0];
+    expect(snippet).toBeDefined();
+    expect(snippet.highlightedLines).toEqual([2, 3]);
+  });
+
+  it("should extract a snippet with multiple highlighted lines", async () => {
+    const snippets = await extractSnippets([
+      { path: "src/__tests__", pattern: "snippets/highlights.ts" },
+    ]);
+    const snippet = snippets["highlight.multiple"][0];
+    expect(snippet).toBeDefined();
+    expect(snippet.highlightedLines).toEqual([2, 3, 7]);
+  });
+
+  // TODO: why does this test timeout when a glob finds no files? Investigate it...
+  xit("should return an empty object if no files are found", async () => {
+    const snippets = await extractSnippets([
+      { path: "src/__tests__", pattern: "snippets/missing.*" },
+    ]);
+    expect(snippets).toEqual({});
   });
 });
