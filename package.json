@@ -1,6 +1,6 @@
 {
   "name": "coldsnip",
-  "version": "0.9.0-alpha.3",
+  "version": "0.9.0",
   "description": "Extracts code snippets from source files",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
