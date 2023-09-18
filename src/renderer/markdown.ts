@@ -123,7 +123,7 @@ export function codeBlock(
     config.push("showLineNumbers");
   }
   if (showFilename) {
-    config.push(`filename=${snippet.filename}`);
+    config.push(`filename="${snippet.filename}"`);
   }
 
   const block = [`\`\`\`${config.join(" ")}`];

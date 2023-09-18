@@ -71,7 +71,7 @@ async function parseFile(input: ParseInput) {
             qualifier: includeTag.args.qualifier,
           });
           if (snippet) {
-            content.push(codeBlock(snippet, { ...includeTag.args }));
+            content.push("", codeBlock(snippet, { ...includeTag.args }), "");
           } else {
             console.warn(`Snippet with key "${includeTag.args.id}" not found`);
           }

@@ -19,16 +19,19 @@ Coldsnip can be used as a library, as a CLI or through direct integrations with 
 ### Library
 
 <!-- @include:start("readme.lib") -->
+
 ```ts
 const snippets = await extractSnippets([
   { path: "src/__tests__", pattern: "snippets/twoSnippets.js" },
 ]);
 ```
+
 <!-- @include:end -->
 
 The return type is an map between the key and the snippet information, as detailed bellow:
 
 <!-- @include:start("readme.types") -->
+
 ```ts
 /**
  * Represents a code snippet extracted from a source file. The field
@@ -66,6 +69,7 @@ export interface Snippet {
  */
 export type Snippets = { [key: string]: Snippet[] };
 ```
+
 <!-- @include:end -->
 
 ## Roadmap
