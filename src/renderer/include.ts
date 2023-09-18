@@ -1,10 +1,13 @@
 import { asyncify, queue } from "async";
 import glob from "fast-glob";
 import { writeFile } from "fs/promises";
+import { EOL } from "os";
 import process from "process";
 import forEachLine from "../forEachLine";
 import lookupSnippet from "../lookupSnippet";
+import { matchesEndTag, matchesStartTag, OpenTag } from "../patterns";
 import type { Snippets } from "../types";
+import { codeBlock, CodeBlockOptions } from "./markdown";
 import type { Renderer } from "./types";
 
 type Options = {
@@ -12,30 +15,32 @@ type Options = {
 };
 
 const DEFAULT_OPTIONS: Options = {
-  pattern: "**/*.md",
+  pattern: "**/*.{md,mdx}",
 };
 
 const TAG_PATTERN = /^(\s*)<!---?\s*@snippet:include\((.*)\)\s*-?-->/;
 const CODE_FENCE_PATTERN = /^(\s*)```/;
 const CODE_FENCE = "```";
 
-type IncludeTag = {
-  key: string;
-  language?: string;
-  qualifier?: string;
+type IncludeStartTag = OpenTag & {
+  args: {
+    id: string;
+    language?: string;
+    qualifier?: string;
+  } & CodeBlockOptions;
 };
 
-type FileRenderStep = "content" | "tag" | "codeblock";
-
-function parseIncludeTag(value: string): IncludeTag {
-  const [key, language, qualifier] = value
-    .split(",")
-    .map((item) => item.trim());
-  if (!key || key.length === 0) {
-    throw Error("");
-  }
-  return { key, language, qualifier };
+export function isIncludeStartTag(
+  tag: OpenTag | undefined,
+): tag is IncludeStartTag {
+  return (
+    tag !== undefined &&
+    tag.name === "include" &&
+    typeof tag.args?.id === "string"
+  );
 }
+
+type FileRenderStep = "content" | "tag";
 
 type ParseInput = {
   file: string;
@@ -51,41 +56,38 @@ async function parseFile(input: ParseInput) {
   await forEachLine(file, (line) => {
     const { lineContent } = line;
 
-    const includeTagMatch = TAG_PATTERN.exec(lineContent);
-    const codeFenceMatch = CODE_FENCE_PATTERN.exec(lineContent);
-
+    const includeTag = matchesStartTag(lineContent);
     switch (step) {
       case "content":
         content.push(lineContent);
-        if (includeTagMatch) {
+        if (isIncludeStartTag(includeTag)) {
           shouldRewrite = true;
-          const [, indent, args] = includeTagMatch;
-          const tag = parseIncludeTag(args);
           step = "tag";
+          // const indent = includeTag.indent;
 
-          const snippet = lookupSnippet(snippets, tag);
+          const snippet = lookupSnippet(snippets, {
+            key: includeTag.args.id,
+            language: includeTag.args.language,
+            qualifier: includeTag.args.qualifier,
+          });
           if (snippet) {
-            content.push(indent + CODE_FENCE + snippet.language);
-            content.push(
-              ...snippet.content.split("\n").map((value) => indent + value),
-            );
-            content.push(indent + CODE_FENCE);
+            content.push(codeBlock(snippet, { ...includeTag.args }));
           } else {
-            console.warn(`Snippet with key "${tag.key}" not found`);
+            console.warn(`Snippet with key "${includeTag.args.id}" not found`);
           }
         }
         break;
       case "tag":
-        step = codeFenceMatch ? "codeblock" : "content";
-        break;
-      case "codeblock":
-        step = codeFenceMatch ? "content" : "codeblock";
+        if (matchesEndTag(lineContent)?.name === "include") {
+          step = "content";
+          content.push(lineContent);
+        }
         break;
     }
   });
 
   if (shouldRewrite) {
-    await writeFile(file, content.join("\n"), { encoding: "utf-8" });
+    await writeFile(file, content.join("\n") + EOL, { encoding: "utf-8" });
   }
 }
 
@@ -98,7 +100,11 @@ export default class IncludeRenderer implements Renderer {
 
   async render(snippets: Snippets) {
     const { pattern } = this.options;
-    const files = await glob(pattern, { cwd: process.cwd(), absolute: true });
+    const files = await glob(pattern, {
+      cwd: process.cwd(),
+      absolute: true,
+      ignore: ["./node_modules/**"],
+    });
 
     const renderingQueue = queue<ParseInput>(asyncify(parseFile));
     for (const file of files) {

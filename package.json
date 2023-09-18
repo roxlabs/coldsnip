@@ -29,7 +29,7 @@
     "build:cli": "tsc --project tsconfig.cli.json",
     "build": "npm run build:lib && npm run build:cli",
     "docs:readme": "cp README.md ./docs/_includes/home.md",
-    "docs:coldsnip": "./bin/run generate --out docs/snippets.json",
+    "docs:coldsnip": "./bin/run generate --source=./src --pattern=**/*.ts --format=include",
     "docs:typedoc": "typedoc --tsconfig tsconfig.lib.json",
     "docs": "npm run docs:readme & npm run docs:typedoc",
     "format:imports": "organize-imports-cli tsconfig.json",

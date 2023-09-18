@@ -1,11 +1,9 @@
-import exp from "constants";
 import {
   isSnippetStartTag,
   matchesEndTag,
   matchesStartTag,
   parseValue,
 } from "../patterns";
-import { parse } from "path";
 
 describe("the pattern matching test suite", () => {
   it("should match the start tag with a key", () => {
@@ -47,13 +45,13 @@ describe("the pattern matching test suite", () => {
   it("should match the snippet end tag", () => {
     // SQL style comments
     const comment = "-- @snippet:end";
-    expect(matchesEndTag(comment)).toEqual({ name: "snippet" });
+    expect(matchesEndTag(comment)).toEqual({ name: "snippet", indent: "" });
   });
 
   it("should match the highlight end tag", () => {
     // Python style comments
-    const comment = "# @highlight:end";
-    expect(matchesEndTag(comment)).toEqual({ name: "highlight" });
+    const comment = "  # @highlight:end";
+    expect(matchesEndTag(comment)).toEqual({ name: "highlight", indent: "  " });
   });
 
   it("should parse values correctly", () => {
