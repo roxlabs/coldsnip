@@ -1,18 +1,20 @@
-export const COMMENT_TOKEN = /(\/\/|\/\*|#|--|\(\*|<!--|{-|')/;
-export const TAG_TOKEN = /@(snippet|highlight)/;
+export const COMMENT_TOKEN = /(\/\/|\/\*|#|--|\(\*|<!---?|{-|'|\{\/\*})/;
+export const TAG_TOKEN = /@(snippet|highlight|include)/;
 
 export const START = new RegExp(
-  `${COMMENT_TOKEN.source}\\s*(?:${TAG_TOKEN.source}):(?:start)\\s*(?:\\(([\\S ]+)\\))?`,
+  `(\\s*)${COMMENT_TOKEN.source}\\s*(?:${TAG_TOKEN.source}):(?:start)\\s*(?:\\(([\\S ]+)\\))?`,
 );
-const START_TAG_GROUP = 2;
-const START_ARG_GROUP = 3;
+const START_INDENT_GROUP = 1;
+const START_TAG_GROUP = 3;
+const START_ARG_GROUP = 4;
 
 export const END = new RegExp(
-  `${COMMENT_TOKEN.source}\\s*(?:${TAG_TOKEN.source}):(end)`,
+  `(.*)${COMMENT_TOKEN.source}\\s*(?:${TAG_TOKEN.source}):(end)`,
 );
 
 type Tag = {
-  name: "snippet" | "highlight";
+  name: "snippet" | "highlight" | "include";
+  indent: string;
 };
 
 export type OpenTag = Tag & {
@@ -75,6 +77,7 @@ function parseArguments(args: string): TagArgs {
 export function matchesStartTag(value: string): OpenTag | undefined {
   const match = START.exec(value);
   if (match && match[START_TAG_GROUP]) {
+    const indent = match[START_INDENT_GROUP] || "";
     const name = match[START_TAG_GROUP];
     const argsStr = match[START_ARG_GROUP];
     let args;
@@ -82,6 +85,7 @@ export function matchesStartTag(value: string): OpenTag | undefined {
       args = parseArguments(argsStr);
     }
     return {
+      indent,
       name: name as OpenTag["name"],
       args,
     };
@@ -93,7 +97,8 @@ export function matchesEndTag(value: string): CloseTag | undefined {
   const match = END.exec(value);
   if (match && match[START_TAG_GROUP]) {
     const name = match[START_TAG_GROUP];
-    return { name: name as CloseTag["name"] };
+    const indent = match[START_INDENT_GROUP] || "";
+    return { indent, name: name as CloseTag["name"] };
   }
   return undefined;
 }

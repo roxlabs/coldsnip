@@ -17,7 +17,7 @@ describe("the extractSnippets public API test suite", () => {
   });
 
   it("should extract two snippets", async () => {
-    // @snippet:start(readme.lib)
+    // @snippet:start("readme.lib")
     const snippets = await extractSnippets([
       { path: "src/__tests__", pattern: "snippets/twoSnippets.js" },
     ]);

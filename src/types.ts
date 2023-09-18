@@ -1,4 +1,4 @@
-// @snippet:start(readme.types)
+// @snippet:start("readme.types")
 /**
  * Represents a code snippet extracted from a source file. The field
  * `permalink` is only present when the source is from a Git repository.

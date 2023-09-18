@@ -119,15 +119,8 @@ async function extractSnippetFromFile(
           key = openTag.args.id;
           qualifier = openTag.args.qualifier;
           startLine = lineNumber + 1;
-        } else if (
-          lineContent.includes("@highlight") ||
-          lineContent.includes("@highlight:start")
-        ) {
-          // TODO improve error state detection
-          throw new Error(
-            `Invalid state: '@highlight' or '@highlight:start' found outside a snippet at line ${lineNumber}`,
-          );
         }
+        // TODO improve edge case handling and invalid tag handling
         break;
 
       case "INSIDE_SNIPPET":
