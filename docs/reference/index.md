@@ -1,4 +1,4 @@
-# coldsnip - v0.9.0-alpha.3
+# coldsnip - v0.9.1
 
 ## Table of contents
 
@@ -10,6 +10,7 @@
 
 ### Type Aliases
 
+- [ExtractSnippetOptions](index.md#extractsnippetoptions)
 - [LookupOptions](index.md#lookupoptions)
 - [Snippets](index.md#snippets)
 - [SourcePath](index.md#sourcepath)
@@ -20,6 +21,24 @@
 - [lookupSnippets](index.md#lookupsnippets)
 
 ## Type Aliases
+
+### ExtractSnippetOptions
+
+Ƭ **ExtractSnippetOptions**: `Object`
+
+Options to customize the snippet extraction process.
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `branch` | `string` | The branch to use when extracting snippets from remote Git repositories. **`Default`** ```ts "main" ``` |
+
+#### Defined in
+
+[types.ts:115](https://github.com/roxlabs/coldsnip/blob/3c9352e/src/types.ts#L115)
+
+___
 
 ### LookupOptions
 
@@ -38,7 +57,7 @@ are useful for matching multi-language snippets indexed by the same key.
 
 #### Defined in
 
-[lookupSnippet.ts:7](https://github.com/roxlabs/coldsnip/blob/f9e1b95/src/lookupSnippet.ts#L7)
+[lookupSnippet.ts:7](https://github.com/roxlabs/coldsnip/blob/3c9352e/src/lookupSnippet.ts#L7)
 
 ___
 
@@ -57,7 +76,7 @@ each supported language.
 
 #### Defined in
 
-[types.ts:36](https://github.com/roxlabs/coldsnip/blob/f9e1b95/src/types.ts#L36)
+[types.ts:36](https://github.com/roxlabs/coldsnip/blob/3c9352e/src/types.ts#L36)
 
 ___
 
@@ -70,13 +89,13 @@ entry point of the library.
 
 #### Defined in
 
-[types.ts:80](https://github.com/roxlabs/coldsnip/blob/f9e1b95/src/types.ts#L80)
+[types.ts:80](https://github.com/roxlabs/coldsnip/blob/3c9352e/src/types.ts#L80)
 
 ## Functions
 
 ### extractSnippets
 
-▸ **extractSnippets**(`sources`): `Promise`<[`Snippets`](index.md#snippets)\>
+▸ **extractSnippets**(`sources`, `options?`): `Promise`<[`Snippets`](index.md#snippets)\>
 
 The main function of the library. It takes a list of [SourcePath](index.md#sourcepath) that represents
 local directories or Git repositories where source files containing tagged code snippets
@@ -91,9 +110,10 @@ const snippets = await extractSnippets([
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `sources` | [`SourcePath`](index.md#sourcepath)[] | a collection of local or remote (_i.e._ Git) sources. |
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `sources` | [`SourcePath`](index.md#sourcepath)[] | `undefined` | a collection of local or remote (_i.e._ Git) sources. |
+| `options` | [`ExtractSnippetOptions`](index.md#extractsnippetoptions) | `DEFAULT_EXTRACT_OPTIONS` | a set of optional parameters to customize the snippet extraction process. |
 
 #### Returns
 
@@ -108,7 +128,7 @@ extractSnippets
 
 #### Defined in
 
-[extractSnippets.ts:217](https://github.com/roxlabs/coldsnip/blob/f9e1b95/src/extractSnippets.ts#L217)
+[extractSnippets.ts:223](https://github.com/roxlabs/coldsnip/blob/3c9352e/src/extractSnippets.ts#L223)
 
 ___
 
@@ -136,4 +156,4 @@ the matching snippet or `undefined` in case it couldn't be found.
 
 #### Defined in
 
-[lookupSnippet.ts:26](https://github.com/roxlabs/coldsnip/blob/f9e1b95/src/lookupSnippet.ts#L26)
+[lookupSnippet.ts:26](https://github.com/roxlabs/coldsnip/blob/3c9352e/src/lookupSnippet.ts#L26)

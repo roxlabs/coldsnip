@@ -26,6 +26,7 @@ export async function ensureRepoIsCurrent(
   return {
     commit,
     workingDir,
+    branch,
   };
 }
 
@@ -33,11 +34,11 @@ export function getPermalink(ref: GitFileRef): string {
   const url = new URL(ref.repoUrl);
   switch (url.hostname) {
     case "github.com":
-      return `${ref.repoUrl}/blob/${ref.commit}/${ref.path}#L${ref.startLine}-L${ref.endLine}`;
+      return `${ref.repoUrl}/blob/${ref.branch}/${ref.path}#L${ref.startLine}-L${ref.endLine}`;
     case "gitlab.com":
-      return `${ref.repoUrl}/-/blob/${ref.commit}/${ref.path}#L${ref.startLine}-${ref.endLine}`;
+      return `${ref.repoUrl}/-/blob/${ref.branch}/${ref.path}#L${ref.startLine}-${ref.endLine}`;
     case "bitbucket.org":
-      return `${ref.repoUrl}/src/${ref.commit}/${ref.path}#lines-${ref.startLine}:${ref.endLine}`;
+      return `${ref.repoUrl}/src/${ref.branch}/${ref.path}#lines-${ref.startLine}:${ref.endLine}`;
     default:
       throw new Error(`Git provider not yet supported: ${ref.repoUrl}`);
   }

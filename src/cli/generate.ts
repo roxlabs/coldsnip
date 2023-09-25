@@ -51,6 +51,12 @@ class GenerateCommand extends Command {
       dependsOn: ["source"],
       description: "the file match pattern, e.g. src/**/*.js",
     }),
+    branch: Flags.string({
+      char: "b",
+      required: false,
+      description: "the target git branch name for permalinks",
+      default: "main",
+    }),
   };
 
   async run() {
@@ -60,6 +66,7 @@ class GenerateCommand extends Command {
       source,
       pattern = DEFAULT_SOURCE_FILES_PATTERN,
       format,
+      branch,
       out: outputPath,
     } = flags;
     let parsedConfig: Config | undefined;
