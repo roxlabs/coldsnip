@@ -15,23 +15,23 @@ This project was motivated by past experiences dealing with outdated or faulty c
 
 Coldsnip can be used as a library, as a CLI or through direct integrations with other platforms. Check the [getting started guide](https://roxlabs.github.io/coldsnip/getting-started/) in order to determine the best option for your needs.
 
-### CLI Commands
-
-<!-- commands -->
-<!-- commandsstop -->
 
 ### Library
 
-<!--- @snippet:include(readme.lib) --->
+<!-- @include:start("readme.lib") -->
+
 ```ts
 const snippets = await extractSnippets([
   { path: "src/__tests__", pattern: "snippets/twoSnippets.js" },
 ]);
 ```
 
+<!-- @include:end -->
+
 The return type is an map between the key and the snippet information, as detailed bellow:
 
-<!--- @snippet:include(readme.types) --->
+<!-- @include:start("readme.types") -->
+
 ```ts
 /**
  * Represents a code snippet extracted from a source file. The field
@@ -42,10 +42,14 @@ export interface Snippet {
   language: string;
   /** The file path relative to the working directory. */
   sourcePath: string;
+  /** The name of the file, derived from `sourcePath`. */
+  filename: string;
   /** The start line of the snippet. */
   startLine: number;
   /** The end line of the snippet. */
   endLine: number;
+  /** The lines to be highlighted, if any. */
+  highlightedLines: number[];
   /** The snippet content. Leading spaces are trimmed. */
   content: string;
   /** The link to the file on the remote Git repo when available. */
@@ -66,6 +70,8 @@ export interface Snippet {
 export type Snippets = { [key: string]: Snippet[] };
 ```
 
+<!-- @include:end -->
+
 ## Roadmap
 
 See the [open feature requests](https://github.com/roxlabs/coldsnip/labels/enhancement) for a list of proposed features and join the discussion.
@@ -77,9 +83,9 @@ Contributions are what make the open source community such an amazing place to b
 1. Make sure you read our [Code of Conduct](https://github.com/roxlabs/coldsnip/blob/main/CODE_OF_CONDUCT.md)
 1. Fork the project and clone your fork
 1. Setup the local environment with `npm install`
-1. Create a feature branch (`git checkout -b feature/AmazingFeature`) or a bugfix branch (`git checkout -b fix/BoringBug`)
-1. Commit the changes (`git commit -m 'Some meaningful message'`)
-1. Push to the branch (`git push origin feature/AmazingFeature`)
+1. Create a feature branch (`git checkout -b feature/cool-thing`) or a bugfix branch (`git checkout -b fix/bad-bug`)
+1. Commit the changes (`git commit -m 'feat: some meaningful message'`)
+1. Push to the branch (`git push origin feature/cool-thing`)
 1. Open a Pull Request
 
 

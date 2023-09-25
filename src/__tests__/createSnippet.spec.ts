@@ -16,7 +16,7 @@ describe("the createSnippet test suite", () => {
     const snippet = createSnippet({
       filePath: "src/index.ts",
       repoUrl: "https://github.com/roxlabs/coldsnip",
-      commit: "d16f69f4eb4f46855c66420c02c586138fb38fcf",
+      branch: "main",
       directory: "./",
       startLine: 1,
       endLine: 2,

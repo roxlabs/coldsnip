@@ -84,13 +84,13 @@ export type GitRepoInfo = Omit<GitRepo, "pattern">;
 export interface SourceRef {
   directory: string;
   repoUrl?: string;
-  commit?: string;
+  branch?: string;
 }
 
 export interface GitFileRef {
   repoUrl: string;
   path: string;
-  commit: string;
+  branch: string;
   startLine: number;
   endLine: number;
 }
@@ -98,6 +98,7 @@ export interface GitFileRef {
 export interface GitRepoRef {
   workingDir: string;
   commit: string;
+  branch: string;
 }
 
 export type OutputFormat = "json" | "markdown" | "include";
@@ -107,3 +108,14 @@ export type SnippetTransformer = (snippets: Snippets) => Promise<void>;
 export interface Config {
   paths: SourcePath | SourcePath[];
 }
+
+/**
+ * Options to customize the snippet extraction process.
+ */
+export type ExtractSnippetOptions = {
+  /**
+   * The branch to use when extracting snippets from remote Git repositories.
+   * @default "main"
+   */
+  branch: string;
+};

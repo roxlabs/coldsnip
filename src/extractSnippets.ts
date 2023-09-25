@@ -10,7 +10,12 @@ import {
   matchesEndTag,
   matchesStartTag,
 } from "./patterns";
-import type { Snippets, SourcePath, SourceRef } from "./types";
+import type {
+  ExtractSnippetOptions,
+  Snippets,
+  SourcePath,
+  SourceRef,
+} from "./types";
 
 type SourceFilesTuple = [string[], SourceRef];
 type SourceFileRecord = { filePath: string; ref: SourceRef };
@@ -23,8 +28,10 @@ type SourceFileRecord = { filePath: string; ref: SourceRef };
  */
 export async function findFiles(
   sources: SourcePath[],
+  options: ExtractSnippetOptions,
 ): Promise<SourceFilesTuple[]> {
   const promises: Array<Promise<SourceFilesTuple>> = [];
+  const { branch } = options;
   for (const source of sources) {
     if ("path" in source) {
       // when in local paths, try to get git info if possible
@@ -32,7 +39,7 @@ export async function findFiles(
       promises.push(
         Promise.all([
           glob(source.pattern, { cwd: source.path, absolute: true }),
-          Promise.resolve({ directory: source.path, repoUrl, commit }),
+          Promise.resolve({ directory: source.path, repoUrl, commit, branch }),
         ]),
       );
     } else if ("url" in source) {
@@ -46,6 +53,7 @@ export async function findFiles(
             directory: workingDir,
             repoUrl: source.url,
             commit,
+            branch,
           }),
         ]),
       );
@@ -134,7 +142,7 @@ async function extractSnippetFromFile(
         } else if (matchesEndTag(lineContent)?.name === "snippet") {
           state = "OUTSIDE_SNIPPET";
           const endLine = lineNumber - 1;
-          const { repoUrl, commit, directory } = ref;
+          const { repoUrl, branch, directory } = ref;
 
           snippets[key as string] = [
             createSnippet({
@@ -144,7 +152,7 @@ async function extractSnippetFromFile(
               startLine: startLine as number,
               endLine,
               repoUrl,
-              commit,
+              branch,
               qualifier,
               highlightedLines,
             }),
@@ -189,6 +197,10 @@ async function extractSnippetFromFile(
   return snippets;
 }
 
+const DEFAULT_EXTRACT_OPTIONS: ExtractSnippetOptions = {
+  branch: "main",
+};
+
 /**
  * The main function of the library. It takes a list of {@link SourcePath} that represents
  * local directories or Git repositories where source files containing tagged code snippets
@@ -204,12 +216,17 @@ async function extractSnippetFromFile(
  * @name extractSnippets
  * @public
  * @param sources a collection of local or remote (_i.e._ Git) sources.
+ * @param options a set of optional parameters to customize the snippet extraction process.
  * @returns an object indexed by a key, representing the snippet identifier and an array of one
  * or more code snippets.
  */
-async function extractSnippets(sources: SourcePath[]): Promise<Snippets> {
+async function extractSnippets(
+  sources: SourcePath[],
+  options: ExtractSnippetOptions = DEFAULT_EXTRACT_OPTIONS,
+): Promise<Snippets> {
   // Find all files, either from local path or a git repo
-  const files = await findFiles(sources);
+  const computedOptions = { ...DEFAULT_EXTRACT_OPTIONS, ...options };
+  const files = await findFiles(sources, computedOptions);
   if (files.length === 0) {
     return {};
   }

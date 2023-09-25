@@ -10,7 +10,7 @@ type SnippetInput = {
   startLine: number;
   endLine: number;
   qualifier?: string;
-  commit?: string;
+  branch?: string;
   repoUrl?: string;
   highlightedLines?: number[];
 };
@@ -22,16 +22,16 @@ export default function createSnippet(input: SnippetInput): Snippet {
     startLine,
     endLine,
     repoUrl,
-    commit,
+    branch,
     qualifier,
     highlightedLines = [],
   } = input;
   const sourcePath = getRelativePath(directory, filePath);
   const permalink =
-    repoUrl !== undefined && commit !== undefined
+    repoUrl !== undefined && branch !== undefined
       ? getPermalink({
           repoUrl,
-          commit,
+          branch,
           startLine: startLine as number,
           endLine,
           path: sourcePath,
